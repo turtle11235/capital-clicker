@@ -1,49 +1,65 @@
+import { HIRING_BONUS } from "../constants"
+import Game from "../Game"
+import Employee from "./Employee"
+
 export default class EmployeeManager {
-  employees: any[];
-  click: () => void;
-  pay: (amount: number) => void;
+  game: Game
+  root: Employee | null = null
+  // click: () => void
+  // pay: (amount: number) => void
 
-  minWage = 7.5;
-  wage = 7.5;
-  numWorkers = 0;
-  numManagers = 0;
+  minWage = 7.5
+  wage = 7.5
+  numWorkers = 0
+  numManagers = 0
 
-  canHire = false;
-  canFire = false;
+  canFire = false
 
-  businessUnlocked = false;
-  managersUnlocked = false;
-  middleManagersUnlocked = false;
+  businessUnlocked = false
+  managersUnlocked = false
+  middleManagersUnlocked = false
 
-  constructor(click: () => void, pay: (amount: number) => void) {
-    this.employees = [];
-    this.click = click;
-    this.pay = pay;
+  constructor(game: Game) {
+    this.game = game
   }
 
-  execute = () => {};
+  execute = () => {
+    this.root?.work()
+  }
 
-  hire = () => {};
+  hire = () => {
+    this.root?.hire()
+  }
 
-  fire = () => {};
+  fire = () => {}
 
   getNumWorkers() {
-    return this.numWorkers;
+    return this.numWorkers
   }
 
   getNumManagers() {
-    return this.numManagers;
+    return this.numManagers
   }
 
   unlockBusiness() {
-    this.businessUnlocked = true;
+    this.businessUnlocked = true
   }
 
   unlockManagers() {
-    this.managersUnlocked = true;
+    this.managersUnlocked = true
   }
 
   unlockMiddleManagers() {
-    this.middleManagersUnlocked = true;
+    this.middleManagersUnlocked = true
+  }
+
+  get canHire() {
+    if (this.businessUnlocked) {
+      return this.root
+        ? this.root.canHire
+        : this.game.money > this.wage * HIRING_BONUS
+    } else {
+      return false
+    }
   }
 }
