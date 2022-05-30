@@ -10,6 +10,9 @@ export default class Game {
 
     counter = 0
     counterID = 0
+    
+    businessUnlocked = false
+    
     private moneyManager = new MoneyManager()
     private employeeManager = new EmployeeManager(this.moneyManager.workerClick, this.moneyManager.spendMoney)
     private upgradeManager = new UpgradeManager({
@@ -24,8 +27,8 @@ export default class Game {
         setUserClickVal: (amount: number)=>{this.moneyManager.userClickVal = amount},
         setWorkerClickVal: (amount: number)=>{this.moneyManager.workerClickVal = amount},
     })
+    
     running = false
-    businessUnlocked = false
 
     constructor(app: App, running=false){
         this.app = app
@@ -61,6 +64,7 @@ export default class Game {
             numWorkers: this.employeeManager.numWorkers,
             numManagers: this.employeeManager.numManagers,
             canHire: this.employeeManager.canHire,
+            canFire: this.employeeManager.canFire,
             elapsedTime: this.elapsedTime,
             time: this.time,
             day: this.day
@@ -76,8 +80,33 @@ export default class Game {
         this.businessUnlocked = true
     }
 
+    hireWorker = ()=>{
+        this.employeeManager.hire()
+    }
+
+    fireWorker = ()=>{
+        this.employeeManager.fire()
+    }
+
     get totalMoney(){
         return this.moneyManager.totalMoney
+    }
+
+    get upgradesUnlocked(){
+        if (this.totalMoney > .74){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+    get canHire(){
+        return this.employeeManager.canHire
+    }
+
+    get canFire(){
+        return this.employeeManager.canFire
     }
 
     get elapsedTime(){
