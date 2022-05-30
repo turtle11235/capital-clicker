@@ -1,35 +1,35 @@
-import "./App.css";
-import React, { Component } from "react";
-import Upgrade from "./lib/upgrades/Upgrade";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import BusinessModule from "./components/gameModules/BusinessModule";
-import UpgradesModule from "./components/gameModules/UpgradesModule";
-import Header from "./components/Header";
-import { formatNumber } from "./lib/utils";
-import Game from "./lib/Game";
+import "./App.css"
+import React, { Component } from "react"
+import Upgrade from "./lib/upgrades/Upgrade"
+import { Container, Row, Col, Button } from "react-bootstrap"
+import BusinessModule from "./components/gameModules/BusinessModule"
+import UpgradesModule from "./components/gameModules/UpgradesModule"
+import Header from "./components/Header"
+import { formatNumber } from "./lib/utils"
+import Game from "./lib/Game"
 
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 type State = {
-  money: number;
-  upgrades: Upgrade[];
-  minWage: number;
-  wage: number;
-  numWorkers: number;
-  numManagers: number;
-  canHire: boolean;
-  canFire: boolean;
-  elapsedTime: string;
-  time: string;
-  day: number;
-};
+  money: number
+  upgrades: Upgrade[]
+  minWage: number
+  wage: number
+  numWorkers: number
+  numManagers: number
+  canHire: boolean
+  canFire: boolean
+  elapsedTime: string
+  time: string
+  day: number
+}
 
 export default class App extends Component<{}, State> {
-  state: State;
-  game = new Game(this);
+  state: State
+  game = new Game(this)
 
   constructor(props: {}) {
-    super(props);
+    super(props)
     this.state = {
       money: 0,
       upgrades: [],
@@ -42,12 +42,12 @@ export default class App extends Component<{}, State> {
       elapsedTime: "0:0:0",
       time: "0:0:0",
       day: 0,
-    };
+    }
   }
 
   update = (newState: State) => {
-    this.setState({ ...this.state, ...newState });
-  };
+    this.setState({ ...this.state, ...newState })
+  }
 
   render() {
     return (
@@ -66,19 +66,19 @@ export default class App extends Component<{}, State> {
                 className="py-4 w-50 m-auto"
                 variant="secondary"
                 onClick={(e) => {
-                  this.game.userClick();
-                  const button = e.target as HTMLButtonElement;
-                  button.blur();
+                  this.game.userClick()
+                  const button = e.target as HTMLButtonElement
+                  button.blur()
                 }}
                 onMouseDown={(e) => {
-                  const button = e.target as HTMLButtonElement;
-                  button.classList.remove("btn-secondary");
-                  button.classList.add("btn-danger");
+                  const button = e.target as HTMLButtonElement
+                  button.classList.remove("btn-secondary")
+                  button.classList.add("btn-danger")
                 }}
                 onMouseUp={(e) => {
-                  const button = e.target as HTMLButtonElement;
-                  button.classList.remove("btn-danger");
-                  button.classList.add("btn-secondary");
+                  const button = e.target as HTMLButtonElement
+                  button.classList.remove("btn-danger")
+                  button.classList.add("btn-secondary")
                 }}
               >
                 Make Money
@@ -93,10 +93,10 @@ export default class App extends Component<{}, State> {
               canFire={this.state.canFire}
               canHire={this.state.canHire}
               fireWorker={() => {
-                this.game.fireWorker();
+                this.game.fireWorker()
               }}
               hireWorker={() => {
-                this.game.hireWorker();
+                this.game.hireWorker()
               }}
               // canHireWorker={this.state.canHireWorker}
               // canHireManager={this.state.canHireManager}
@@ -120,6 +120,6 @@ export default class App extends Component<{}, State> {
           </Col>
         </Row>
       </Container>
-    );
+    )
   }
 }
