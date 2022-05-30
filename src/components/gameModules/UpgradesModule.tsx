@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-import Upgrade from "../../lib/upgrades/Upgrade";
-import BaseModule from "./BaseModule";
+import React, { Component } from "react"
+import { Button } from "react-bootstrap"
+import Upgrade from "../../lib/upgrades/Upgrade"
+import BaseModule from "./BaseModule"
 
 type Props = {
-  trigger: boolean;
-  upgrades: Upgrade[];
-};
+  trigger: boolean
+  upgrades: Upgrade[]
+}
 
 export default class UpgradesModule extends Component<Props> {
   render() {
@@ -18,7 +18,7 @@ export default class UpgradesModule extends Component<Props> {
               key={upgrade.id}
               variant="outline-dark"
               onClick={() => {
-                upgrade.effect();
+                upgrade.effect()
               }}
               disabled={!upgrade.cost()}
             >
@@ -28,9 +28,9 @@ export default class UpgradesModule extends Component<Props> {
               <br />
               {upgrade.description}
             </Button>
-          );
+          )
         })}
       </BaseModule>
-    );
+    )
   }
 }

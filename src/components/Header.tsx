@@ -1,12 +1,12 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React from "react"
+import { Row, Col } from "react-bootstrap"
 
 type Props = {
-  elapsedTime: string;
-  day: number;
-  time: string;
-  money: string;
-};
+  elapsedTime: string
+  day: number
+  time: string
+  money: string
+}
 
 export default function Header({ elapsedTime, day, time, money }: Props) {
   return (
@@ -34,5 +34,5 @@ export default function Header({ elapsedTime, day, time, money }: Props) {
         </Col>
       </Row>
     </>
-  );
+  )
 }

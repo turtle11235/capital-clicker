@@ -1,21 +1,21 @@
-import React from "react";
-import { Component } from "react";
-import { Row, Col, Button } from "react-bootstrap";
-import BaseModule from "./BaseModule";
+import React from "react"
+import { Component } from "react"
+import { Row, Col, Button } from "react-bootstrap"
+import BaseModule from "./BaseModule"
 
 type Props = {
-  trigger: boolean;
-  className?: string;
-  minWage: string;
-  fireWorker: () => void;
-  hireWorker: () => void;
-  canFire: boolean;
-  canHire: boolean;
-  numWorkers: Number;
-  numManagers: Number;
-};
+  trigger: boolean
+  className?: string
+  minWage: string
+  fireWorker: () => void
+  hireWorker: () => void
+  canFire: boolean
+  canHire: boolean
+  numWorkers: Number
+  numManagers: Number
+}
 
-type State = {};
+type State = {}
 
 export default class BusinessModule extends Component<Props, State> {
   render() {
@@ -62,6 +62,6 @@ export default class BusinessModule extends Component<Props, State> {
           </Col>
         </Row>
       </BaseModule>
-    );
+    )
   }
 }

@@ -1,49 +1,49 @@
 export default class EmployeeManager {
-  employees: any[];
-  click: () => void;
-  pay: (amount: number) => void;
+  employees: any[]
+  click: () => void
+  pay: (amount: number) => void
 
-  minWage = 7.5;
-  wage = 7.5;
-  numWorkers = 0;
-  numManagers = 0;
+  minWage = 7.5
+  wage = 7.5
+  numWorkers = 0
+  numManagers = 0
 
-  canHire = false;
-  canFire = false;
+  canHire = false
+  canFire = false
 
-  businessUnlocked = false;
-  managersUnlocked = false;
-  middleManagersUnlocked = false;
+  businessUnlocked = false
+  managersUnlocked = false
+  middleManagersUnlocked = false
 
   constructor(click: () => void, pay: (amount: number) => void) {
-    this.employees = [];
-    this.click = click;
-    this.pay = pay;
+    this.employees = []
+    this.click = click
+    this.pay = pay
   }
 
-  execute = () => {};
+  execute = () => {}
 
-  hire = () => {};
+  hire = () => {}
 
-  fire = () => {};
+  fire = () => {}
 
   getNumWorkers() {
-    return this.numWorkers;
+    return this.numWorkers
   }
 
   getNumManagers() {
-    return this.numManagers;
+    return this.numManagers
   }
 
   unlockBusiness() {
-    this.businessUnlocked = true;
+    this.businessUnlocked = true
   }
 
   unlockManagers() {
-    this.managersUnlocked = true;
+    this.managersUnlocked = true
   }
 
   unlockMiddleManagers() {
-    this.middleManagersUnlocked = true;
+    this.middleManagersUnlocked = true
   }
 }
