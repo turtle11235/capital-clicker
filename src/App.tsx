@@ -68,7 +68,7 @@ export default class App extends Component<{}, State>{
                   className="py-4 w-50 m-auto"
                   variant="secondary"
                   onClick={(e)=>{
-                      this.game.clickButton()
+                      this.game.userClick()
                       const button = e.target as HTMLButtonElement
                       button.blur()
                   }}

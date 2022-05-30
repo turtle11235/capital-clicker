@@ -15,18 +15,7 @@ export default class Game {
     
     private moneyManager = new MoneyManager()
     private employeeManager = new EmployeeManager(this.moneyManager.workerClick, this.moneyManager.spendMoney)
-    private upgradeManager = new UpgradeManager({
-        getTotalMoney: ()=>{return this.moneyManager.totalMoney},
-        getMoney: ()=>{return this.moneyManager.money},
-        getNumWorkers: ()=>{return this.employeeManager.numWorkers},
-        spendMoney: (amount: number)=>{this.moneyManager.spendMoney(amount)},
-        receiveMoney: (amount: number)=>{this.moneyManager.receiveMoney(amount)},
-        unlockBusiness: ()=>{this.employeeManager.businessUnlocked = true},
-        unlockManagers: ()=>{this.employeeManager.managersUnlocked = true},
-        unlockMiddleManagers: ()=>{this.employeeManager.middleManagersUnlocked = true},
-        setUserClickVal: (amount: number)=>{this.moneyManager.userClickVal = amount},
-        setWorkerClickVal: (amount: number)=>{this.moneyManager.workerClickVal = amount},
-    })
+    private upgradeManager = new UpgradeManager(this)
     
     running = false
 
@@ -71,13 +60,41 @@ export default class Game {
           })
     }
 
-    clickButton = ()=>{
+    userClick = ()=>{
         this.moneyManager.userClick()
         this.startGame()
     }
 
+    workerClick = ()=>{
+        this.moneyManager.workerClick()
+    }
+
+    setUserClickVal(amount: number){
+        this.moneyManager.userClickVal = amount
+    }
+
+    setWorkerClickVal(amount: number){
+        this.moneyManager.workerClickVal = amount
+    }
+
+    spendMoney = (amount: number)=>{
+        this.moneyManager.spendMoney(amount)
+    }
+
+    receiveMoney = (amount: number)=>{
+        this.moneyManager.receiveMoney(amount)
+    }
+
     unlockBusiness = ()=>{
         this.businessUnlocked = true
+    }
+
+    unlockManagers = ()=>{
+        this.employeeManager.managersUnlocked = true
+    }
+
+    unlockMiddleManagers = ()=>{
+        this.employeeManager.middleManagersUnlocked = true
     }
 
     hireWorker = ()=>{
@@ -92,6 +109,26 @@ export default class Game {
         return this.moneyManager.totalMoney
     }
 
+    get money(){
+        return this.moneyManager.money
+    }
+
+    get numWorkers(){
+        return this.employeeManager.numWorkers
+    }
+
+    get numManagers(){
+        return this.employeeManager.numManagers
+    }
+
+    get canHire(){
+        return this.employeeManager.canHire
+    }
+    
+    get canFire(){
+        return this.employeeManager.canFire
+    }
+    
     get upgradesUnlocked(){
         if (this.totalMoney > .74){
             return true
@@ -99,14 +136,6 @@ export default class Game {
         else {
             return false
         }
-    }
-
-    get canHire(){
-        return this.employeeManager.canHire
-    }
-
-    get canFire(){
-        return this.employeeManager.canFire
     }
 
     get elapsedTime(){
