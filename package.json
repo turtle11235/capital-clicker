@@ -9,6 +9,7 @@
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -35,7 +36,4 @@
       "last 1 safari version"
     ]
   }
-
-
-chpartin/fix-thingy
-emrys/fix-bug
+}
