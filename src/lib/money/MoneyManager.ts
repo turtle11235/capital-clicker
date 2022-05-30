@@ -1,49 +1,53 @@
-
 export default class MoneyManager {
-    money: number
-    totalMoney: number
-    userClickVal: number
-    workerClickVal: number
+  money: number;
+  totalMoney: number;
+  userClickVal: number;
+  workerClickVal: number;
 
-    constructor(money=0, totalMoney=0, userClickVal=.01, workerClickVal=.01){
-        this.money = money
-        this.totalMoney = totalMoney
-        this.userClickVal = userClickVal
-        this.workerClickVal = workerClickVal
-    }
-    
-    userClick(){
-        this.money += this.userClickVal
-        this.totalMoney += this.userClickVal
-    }
+  constructor(
+    money = 0,
+    totalMoney = 0,
+    userClickVal = 0.01,
+    workerClickVal = 0.01
+  ) {
+    this.money = money;
+    this.totalMoney = totalMoney;
+    this.userClickVal = userClickVal;
+    this.workerClickVal = workerClickVal;
+  }
 
-    workerClick(n=1){
-        this.money += this.workerClickVal * n
-        this.totalMoney += this.workerClickVal * n
-    }
+  userClick() {
+    this.money += this.userClickVal;
+    this.totalMoney += this.userClickVal;
+  }
 
-    spendMoney(amount: number){
-        this.money -= amount
-    }
+  workerClick(n = 1) {
+    this.money += this.workerClickVal * n;
+    this.totalMoney += this.workerClickVal * n;
+  }
 
-    receiveMoney(amount: number){
-        this.money += amount
-        this.totalMoney += amount
-    }
+  spendMoney(amount: number) {
+    this.money -= amount;
+  }
 
-    getMoney = ()=>{
-        return this.money
-    }
+  receiveMoney(amount: number) {
+    this.money += amount;
+    this.totalMoney += amount;
+  }
 
-    getTotalMoney = ()=>{
-        return this.totalMoney
-    }
+  getMoney = () => {
+    return this.money;
+  };
 
-    setUserClickVal = (amount: number)=>{
-        this.userClickVal = amount
-    }
+  getTotalMoney = () => {
+    return this.totalMoney;
+  };
 
-    setWorkerClickVal = (amount: number)=>{
-        this.workerClickVal = amount
-    }
+  setUserClickVal = (amount: number) => {
+    this.userClickVal = amount;
+  };
+
+  setWorkerClickVal = (amount: number) => {
+    this.workerClickVal = amount;
+  };
 }

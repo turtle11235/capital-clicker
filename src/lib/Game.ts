@@ -6,148 +6,162 @@ import UpgradeManager from "./upgrades/UpgradeManager";
 import { displayElapsedTime, ticksToSeconds } from "./utils";
 
 export default class Game {
-    app: App
+  app: App;
 
-    counter = 0
-    counterID = 0
-    
-    businessUnlocked = false
-    
-    private moneyManager = new MoneyManager()
-    private employeeManager = new EmployeeManager(this.moneyManager.workerClick, this.moneyManager.spendMoney)
-    private upgradeManager = new UpgradeManager(this)
-    
-    running = false
+  counter = 0;
+  counterID = 0;
 
-    constructor(app: App, running=false){
-        this.app = app
-        this.running = running
-    }
+  businessUnlocked = false;
 
-    startGame = ()=>{
-        if (!this.running) {
-            this.run()
-            this.running = true
-            this.startGame = ()=>{}
-        }
-    }
+  private moneyManager = new MoneyManager();
+  private employeeManager = new EmployeeManager(
+    this.moneyManager.workerClick,
+    this.moneyManager.spendMoney
+  );
+  private upgradeManager = new UpgradeManager(this);
 
-    run = ()=>{
-        this.counterID = setInterval(()=>{
-            this.gameLoop()
-            this.counter++
-        }, 1000 * 1/TICKS_PER_SECOND, null, null)
-    }
+  running = false;
 
-    gameLoop = ()=>{
-        // this.employeeManager.execute()
-        this.updateApp()
-    }
+  constructor(app: App, running = false) {
+    this.app = app;
+    this.running = running;
+  }
 
-    updateApp = ()=>{
-        this.app.update({
-            money: this.moneyManager.money,
-            upgrades: this.upgradeManager.upgrades,
-            minWage: this.employeeManager.minWage,
-            wage: this.employeeManager.wage,
-            numWorkers: this.employeeManager.numWorkers,
-            numManagers: this.employeeManager.numManagers,
-            canHire: this.employeeManager.canHire,
-            canFire: this.employeeManager.canFire,
-            elapsedTime: this.elapsedTime,
-            time: this.time,
-            day: this.day
-          })
+  startGame = () => {
+    if (!this.running) {
+      this.run();
+      this.running = true;
+      this.startGame = () => {};
     }
+  };
 
-    userClick = ()=>{
-        this.moneyManager.userClick()
-        this.startGame()
-    }
+  run = () => {
+    this.counterID = setInterval(
+      () => {
+        this.gameLoop();
+        this.counter++;
+      },
+      (1000 * 1) / TICKS_PER_SECOND,
+      null,
+      null
+    );
+  };
 
-    workerClick = ()=>{
-        this.moneyManager.workerClick()
-    }
+  gameLoop = () => {
+    // this.employeeManager.execute()
+    this.updateApp();
+  };
 
-    setUserClickVal(amount: number){
-        this.moneyManager.userClickVal = amount
-    }
+  updateApp = () => {
+    this.app.update({
+      money: this.moneyManager.money,
+      upgrades: this.upgradeManager.upgrades,
+      minWage: this.employeeManager.minWage,
+      wage: this.employeeManager.wage,
+      numWorkers: this.employeeManager.numWorkers,
+      numManagers: this.employeeManager.numManagers,
+      canHire: this.employeeManager.canHire,
+      canFire: this.employeeManager.canFire,
+      elapsedTime: this.elapsedTime,
+      time: this.time,
+      day: this.day,
+    });
+  };
 
-    setWorkerClickVal(amount: number){
-        this.moneyManager.workerClickVal = amount
-    }
+  userClick = () => {
+    this.moneyManager.userClick();
+    this.startGame();
+  };
 
-    spendMoney = (amount: number)=>{
-        this.moneyManager.spendMoney(amount)
-    }
+  workerClick = () => {
+    this.moneyManager.workerClick();
+  };
 
-    receiveMoney = (amount: number)=>{
-        this.moneyManager.receiveMoney(amount)
-    }
+  setUserClickVal(amount: number) {
+    this.moneyManager.userClickVal = amount;
+  }
 
-    unlockBusiness = ()=>{
-        this.businessUnlocked = true
-    }
+  setWorkerClickVal(amount: number) {
+    this.moneyManager.workerClickVal = amount;
+  }
 
-    unlockManagers = ()=>{
-        this.employeeManager.managersUnlocked = true
-    }
+  spendMoney = (amount: number) => {
+    this.moneyManager.spendMoney(amount);
+  };
 
-    unlockMiddleManagers = ()=>{
-        this.employeeManager.middleManagersUnlocked = true
-    }
+  receiveMoney = (amount: number) => {
+    this.moneyManager.receiveMoney(amount);
+  };
 
-    hireWorker = ()=>{
-        this.employeeManager.hire()
-    }
+  unlockBusiness = () => {
+    this.businessUnlocked = true;
+  };
 
-    fireWorker = ()=>{
-        this.employeeManager.fire()
-    }
+  unlockManagers = () => {
+    this.employeeManager.managersUnlocked = true;
+  };
 
-    get totalMoney(){
-        return this.moneyManager.totalMoney
-    }
+  unlockMiddleManagers = () => {
+    this.employeeManager.middleManagersUnlocked = true;
+  };
 
-    get money(){
-        return this.moneyManager.money
-    }
+  hireWorker = () => {
+    this.employeeManager.hire();
+  };
 
-    get numWorkers(){
-        return this.employeeManager.numWorkers
-    }
+  fireWorker = () => {
+    this.employeeManager.fire();
+  };
 
-    get numManagers(){
-        return this.employeeManager.numManagers
-    }
+  get totalMoney() {
+    return this.moneyManager.totalMoney;
+  }
 
-    get canHire(){
-        return this.employeeManager.canHire
-    }
-    
-    get canFire(){
-        return this.employeeManager.canFire
-    }
-    
-    get upgradesUnlocked(){
-        if (this.totalMoney > .74){
-            return true
-        }
-        else {
-            return false
-        }
-    }
+  get money() {
+    return this.moneyManager.money;
+  }
 
-    get elapsedTime(){
-        return displayElapsedTime(ticksToSeconds(this.counter))
-    }
+  get numWorkers() {
+    return this.employeeManager.numWorkers;
+  }
 
-    get time(){
-        var seconds = (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) % (60 * 60 * 24)
-        return displayElapsedTime(seconds)
-    }
+  get numManagers() {
+    return this.employeeManager.numManagers;
+  }
 
-    get day(){
-        return Math.floor(ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER / 60 / 60 / 24)
+  get canHire() {
+    return this.employeeManager.canHire;
+  }
+
+  get canFire() {
+    return this.employeeManager.canFire;
+  }
+
+  get upgradesUnlocked() {
+    if (this.totalMoney > 0.74) {
+      return true;
+    } else {
+      return false;
     }
+  }
+
+  get elapsedTime() {
+    return displayElapsedTime(ticksToSeconds(this.counter));
+  }
+
+  get time() {
+    var seconds =
+      (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) %
+      (60 * 60 * 24);
+    return displayElapsedTime(seconds);
+  }
+
+  get day() {
+    return Math.floor(
+      (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) /
+        60 /
+        60 /
+        24
+    );
+  }
 }
