@@ -3,6 +3,7 @@ export default class MoneyManager {
   totalMoney: number;
   userClickVal: number;
   workerClickVal: number;
+  readonly roundingError = 0.005;
 
   constructor(
     money = 0,
@@ -36,11 +37,11 @@ export default class MoneyManager {
   }
 
   getMoney = () => {
-    return this.money;
+    return Math.floor((this.money + this.roundingError) * 100) / 100;
   };
 
   getTotalMoney = () => {
-    return this.totalMoney;
+    return Math.floor((this.totalMoney + this.roundingError) * 100) / 100;
   };
 
   setUserClickVal = (amount: number) => {

@@ -113,12 +113,12 @@ export default class Game {
     this.employeeManager.fire();
   };
 
-  get totalMoney() {
-    return this.moneyManager.totalMoney;
+  get money() {
+    return this.moneyManager.getMoney();
   }
 
-  get money() {
-    return this.moneyManager.money;
+  get totalMoney() {
+    return this.moneyManager.getTotalMoney();
   }
 
   get numWorkers() {
