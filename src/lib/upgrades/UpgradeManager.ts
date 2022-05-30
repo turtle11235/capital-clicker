@@ -36,6 +36,7 @@ export default class UpgradeManager {
         return canBuy;
       },
     });
+    this._upgrades.push(u1);
 
     var u2 = new Upgrade({
       title: 'A Slight Improvement',
@@ -52,6 +53,7 @@ export default class UpgradeManager {
         return this.game.money >= 1;
       },
     });
+    this._upgrades.push(u2);
 
     var u3 = new Upgrade({
       title: 'Improved Clicking Technique',
@@ -68,6 +70,7 @@ export default class UpgradeManager {
         return this.game.money >= 4;
       },
     });
+    this._upgrades.push(u3);
 
     var u4 = new Upgrade({
       title: 'Lubricated Button',
@@ -84,6 +87,7 @@ export default class UpgradeManager {
         return this.game.money >= 10;
       },
     });
+    this._upgrades.push(u4);
 
     var u5 = new Upgrade({
       title: 'Local Business License',
@@ -100,6 +104,7 @@ export default class UpgradeManager {
         return this.game.money >= 10;
       },
     });
+    this._upgrades.push(u5);
 
     var u6 = new Upgrade({
       title: 'Company Rollout',
@@ -116,6 +121,7 @@ export default class UpgradeManager {
         return this.game.money >= 25;
       },
     });
+    this._upgrades.push(u6);
 
     var u7 = new Upgrade({
       title: 'Hardware Optimization',
@@ -132,6 +138,7 @@ export default class UpgradeManager {
         return this.game.money >= 25;
       },
     });
+    this._upgrades.push(u7);
 
     var u8 = new Upgrade({
       title: 'Company Rollout 2',
@@ -148,6 +155,7 @@ export default class UpgradeManager {
         return this.game.money >= 50;
       },
     });
+    this._upgrades.push(u8);
 
     var u9 = new Upgrade({
       title: 'Company Rollout 3',
@@ -164,6 +172,7 @@ export default class UpgradeManager {
         return this.game.money >= 100;
       },
     });
+    this._upgrades.push(u9);
 
     var u10 = new Upgrade({
       title: 'Beginner Business Techniques',
@@ -184,6 +193,7 @@ export default class UpgradeManager {
         return this.game.money >= 100;
       },
     });
+    this._upgrades.push(u10);
 
     var u11 = new Upgrade({
       title: 'Middle Management',
@@ -204,6 +214,7 @@ export default class UpgradeManager {
         return this.game.money >= 200;
       },
     });
+    this._upgrades.push(u11);
 
     var u12 = new Upgrade({
       title: 'Friends and Family Investment',
@@ -215,6 +226,7 @@ export default class UpgradeManager {
         this.game.receiveMoney(200);
       },
     });
+    this._upgrades.push(u12);
 
     var u13 = new Upgrade({
       title: 'Company Rollout 3',
@@ -231,6 +243,7 @@ export default class UpgradeManager {
         return this.game.money >= 150;
       },
     });
+    this._upgrades.push(u13);
 
     var u14 = new Upgrade({
       title: 'Hardware Optimization',
@@ -247,6 +260,7 @@ export default class UpgradeManager {
         return this.game.money >= 50;
       },
     });
+    this._upgrades.push(u14);
 
     var u15 = new Upgrade({
       title: 'Company Rollout 4',
@@ -263,23 +277,6 @@ export default class UpgradeManager {
         return this.game.money >= 250;
       },
     });
-
-    this._upgrades = [
-      u1,
-      u2,
-      u3,
-      u4,
-      u5,
-      u6,
-      u7,
-      u8,
-      u9,
-      u10,
-      u11,
-      u12,
-      u13,
-      u14,
-      u15,
-    ];
+    this._upgrades.push(u15);
   };
 }
