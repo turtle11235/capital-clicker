@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 
 type Props = {
     elapsedTime: string,
-    day: string,
+    day: number,
     time: string,
     money: string
 }

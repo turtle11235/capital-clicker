@@ -19,10 +19,12 @@ type State = {
   canHire: boolean,
   elapsedTime: string,
   time: string,
-  day: string
+  day: number
 }
 
 export default class App extends Component<{}, State>{
+  state: State
+
   constructor(props: {}){
     super(props)
     this.state = {
@@ -35,8 +37,12 @@ export default class App extends Component<{}, State>{
       canHire: false,
       elapsedTime: "eleven",
       time: "twelve",
-      day: "tuesday"
+      day: 0
     }
+  }
+
+  update = (newState: State)=>{
+    this.setState({...this.state, ...newState})
   }
 
   render(){
