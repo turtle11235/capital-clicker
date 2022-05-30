@@ -41,3 +41,7 @@
   border-color: rgb(126, 126, 126);
   color: rgb(126, 126, 126);
 }
+
+.mono-number {
+  font-family: "Roboto Mono", monospace;
+}
