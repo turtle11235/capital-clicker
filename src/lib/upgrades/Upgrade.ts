@@ -54,6 +54,5 @@ export default class Upgrade{
     effect = ()=>{
         this._effect()
         this.used = true
-    }
-    
+    }    
 }

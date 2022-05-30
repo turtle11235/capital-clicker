@@ -25,7 +25,7 @@ export default class UpgradesModule extends Component<Props>{
                             }}
                             disabled={!upgrade.cost()}
                         >
-                            <strong>{upgrade.title}</strong>
+                            <strong>{upgrade.title} {upgrade.pricetag}</strong>
                             <br/>
                             {upgrade.description}
                         </Button>
