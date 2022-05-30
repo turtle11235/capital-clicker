@@ -18,6 +18,7 @@ type State = {
   numWorkers: number,
   numManagers: number,
   canHire: boolean,
+  canFire: boolean,
   elapsedTime: string,
   time: string,
   day: number
@@ -30,13 +31,14 @@ export default class App extends Component<{}, State>{
   constructor(props: {}){
     super(props)
     this.state = {
-      money: 1.5,
+      money: 0,
       upgrades: [],
       minWage: 0,
       wage: 0,
       numWorkers: 0,
       numManagers: 0,
       canHire: false,
+      canFire: false,
       elapsedTime: "0:0:0",
       time: "0:0:0",
       day: 0
@@ -85,12 +87,15 @@ export default class App extends Component<{}, State>{
               </Button>
               </Row>
               <BusinessModule
-                // trigger={this.game.businessUnlocked}
-                // numWorkers={this.state.numWorkers}
-                // numManagers={this.state.numManagers}
-                // minWage={formatNumber(this.state.minWage)}
+                trigger={this.game.businessUnlocked}
+                numWorkers={this.state.numWorkers}
+                numManagers={this.state.numManagers}
+                minWage={formatNumber(this.state.minWage)}
                 // wage={formatNumber(this.state.wage)}
-                // canFire={this.state.numWorkers > 0}
+                canFire={this.state.canFire}
+                canHire={this.state.canHire}
+                fireWorker={()=>{this.game.fireWorker()}}
+                hireWorker={()=>{this.game.hireWorker()}}
                 // canHireWorker={this.state.canHireWorker}
                 // canHireManager={this.state.canHireManager}
                 // hireWorkerHandler={this.game.hireWorker}
@@ -101,23 +106,13 @@ export default class App extends Component<{}, State>{
                 // lowerWagesHandler={this.game.lowerWages}
                 // canLowerWages={this.game.wage > this.game.minWage}
                 // managersUnlocked={this.game.managersUnlocked}
-                trigger={true}
-                minWage={"7.50"}
-                fireWorker={()=>{}}
-                hireWorker={()=>{}}
-                canFire={false}
-                canHire={true}
-                numWorkers={10}
-                numManagers={5}
               />
             </Col>
             <Col className="px-4">
               <UpgradesModule
-                // trigger={this.game.upgradesUnlocked}
-                // upgrades={this.state.upgrades}
+                trigger={this.game.upgradesUnlocked}
+                upgrades={this.state.upgrades}
                 // upgradeHandler={this.game.completeUpgrade}
-                trigger={true}
-                upgrades={[]}
                 // upgradeHandler={()=>{}}
               />
             </Col>
