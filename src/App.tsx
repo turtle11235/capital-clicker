@@ -6,6 +6,7 @@ import BusinessModule from './components/gameModules/BusinessModule';
 import UpgradesModule from './components/gameModules/UpgradesModule';
 import Header from './components/Header';
 import { formatNumber } from './lib/utils';
+import Game from './lib/Game'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,6 +25,7 @@ type State = {
 
 export default class App extends Component<{}, State>{
   state: State
+  game = new Game(this)
 
   constructor(props: {}){
     super(props)
@@ -64,7 +66,7 @@ export default class App extends Component<{}, State>{
                   className="py-4 w-50 m-auto"
                   variant="secondary"
                   onClick={(e)=>{
-                      // this.game.clickButton()
+                      this.game.clickButton()
                       const button = e.target as HTMLButtonElement
                       button.blur()
                   }}

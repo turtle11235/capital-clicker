@@ -1,5 +1,6 @@
 import App from "../App";
 import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from "./constants";
+import EmployeeManager from "./EmployeeManager";
 import MoneyManager from "./MoneyManager";
 import UpgradeManager from "./UpgradeManager";
 import { displayElapsedTime, ticksToSeconds } from "./utils";
@@ -10,7 +11,7 @@ export default class Game {
     counter = 0
     counterID = 0
     moneyManager = new MoneyManager()
-    employeeManager: any
+    employeeManager = new EmployeeManager(this.moneyManager.workerClick, this.moneyManager.spendMoney)
     upgradeManager = new UpgradeManager(this)
     running = false
 
@@ -35,7 +36,7 @@ export default class Game {
     }
 
     gameLoop = ()=>{
-        this.employeeManager.execute()
+        // this.employeeManager.execute()
         this.updateApp()
     }
 
@@ -52,6 +53,11 @@ export default class Game {
             time: this.time,
             day: this.day
           })
+    }
+
+    clickButton = ()=>{
+        this.moneyManager.userClick()
+        this.startGame()
     }
 
     get elapsedTime(){
