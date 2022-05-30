@@ -1,9 +1,9 @@
-import App from "../App";
-import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from "./constants";
-import EmployeeManager from "./employees/EmployeeManager";
-import MoneyManager from "./money/MoneyManager";
-import UpgradeManager from "./upgrades/UpgradeManager";
-import { displayElapsedTime, ticksToSeconds } from "./utils";
+import App from '../App';
+import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from './constants';
+import EmployeeManager from './employees/EmployeeManager';
+import MoneyManager from './money/MoneyManager';
+import UpgradeManager from './upgrades/UpgradeManager';
+import { displayElapsedTime, ticksToSeconds } from './utils';
 
 export default class Game {
   app: App;
@@ -138,11 +138,7 @@ export default class Game {
   }
 
   get upgradesUnlocked() {
-    if (this.totalMoney > 0.74) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.upgradeManager.upgradesEnabled;
   }
 
   get elapsedTime() {
