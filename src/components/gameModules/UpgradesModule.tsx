@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-import Upgrade from "../../lib/Upgrade";
+import Upgrade from "../../lib/upgrades/Upgrade";
 import BaseModule from "./BaseModule";
 
 type Props = {

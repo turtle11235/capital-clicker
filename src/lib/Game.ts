@@ -1,8 +1,8 @@
 import App from "../App";
 import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from "./constants";
-import EmployeeManager from "./EmployeeManager";
-import MoneyManager from "./MoneyManager";
-import UpgradeManager from "./UpgradeManager";
+import EmployeeManager from "./employees/EmployeeManager";
+import MoneyManager from "./money/MoneyManager";
+import UpgradeManager from "./upgrades/UpgradeManager";
 import { displayElapsedTime, ticksToSeconds } from "./utils";
 
 export default class Game {
@@ -10,10 +10,22 @@ export default class Game {
 
     counter = 0
     counterID = 0
-    moneyManager = new MoneyManager()
-    employeeManager = new EmployeeManager(this.moneyManager.workerClick, this.moneyManager.spendMoney)
-    upgradeManager = new UpgradeManager(this)
+    private moneyManager = new MoneyManager()
+    private employeeManager = new EmployeeManager(this.moneyManager.workerClick, this.moneyManager.spendMoney)
+    private upgradeManager = new UpgradeManager({
+        getTotalMoney: ()=>{return this.moneyManager.totalMoney},
+        getMoney: ()=>{return this.moneyManager.money},
+        getNumWorkers: ()=>{return this.employeeManager.numWorkers},
+        spendMoney: (amount: number)=>{this.moneyManager.spendMoney(amount)},
+        receiveMoney: (amount: number)=>{this.moneyManager.receiveMoney(amount)},
+        unlockBusiness: ()=>{this.employeeManager.businessUnlocked = true},
+        unlockManagers: ()=>{this.employeeManager.managersUnlocked = true},
+        unlockMiddleManagers: ()=>{this.employeeManager.middleManagersUnlocked = true},
+        setUserClickVal: (amount: number)=>{this.moneyManager.userClickVal = amount},
+        setWorkerClickVal: (amount: number)=>{this.moneyManager.workerClickVal = amount},
+    })
     running = false
+    businessUnlocked = false
 
     constructor(app: App, running=false){
         this.app = app
@@ -58,6 +70,14 @@ export default class Game {
     clickButton = ()=>{
         this.moneyManager.userClick()
         this.startGame()
+    }
+
+    unlockBusiness = ()=>{
+        this.businessUnlocked = true
+    }
+
+    get totalMoney(){
+        return this.moneyManager.totalMoney
     }
 
     get elapsedTime(){

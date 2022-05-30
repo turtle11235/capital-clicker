@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
-import Upgrade from './lib/Upgrade';
+import Upgrade from './lib/upgrades/Upgrade';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import BusinessModule from './components/gameModules/BusinessModule';
 import UpgradesModule from './components/gameModules/UpgradesModule';
@@ -37,8 +37,8 @@ export default class App extends Component<{}, State>{
       numWorkers: 0,
       numManagers: 0,
       canHire: false,
-      elapsedTime: "eleven",
-      time: "twelve",
+      elapsedTime: "0:0:0",
+      time: "0:0:0",
       day: 0
     }
   }
