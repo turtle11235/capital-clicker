@@ -12,6 +12,7 @@ export default class LowerManager extends Manager {
     }
     var employee = EmployeeFactory.createEmployee(employeeProps)
     this.employees.push(employee)
+    this.spendMoney(employee, employee.wage * HIRING_BONUS)
     return employee
   }
 

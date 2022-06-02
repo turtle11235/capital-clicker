@@ -11,8 +11,6 @@ export default class Game {
   counter = 0
   counterID = 0
 
-  businessUnlocked = false
-
   private moneyManager = new MoneyManager()
   private employeeManager = new EmployeeManager(this)
   private upgradeManager = new UpgradeManager(this)
@@ -91,15 +89,15 @@ export default class Game {
   }
 
   unlockBusiness = () => {
-    this.businessUnlocked = true
+    this.employeeManager.unlockBusiness()
   }
 
   unlockManagers = () => {
-    this.employeeManager.managersUnlocked = true
+    this.employeeManager.unlockManagers()
   }
 
   unlockMiddleManagers = () => {
-    this.employeeManager.middleManagersUnlocked = true
+    this.employeeManager.unlockMiddleManagers()
   }
 
   hireWorker = () => {
@@ -116,6 +114,10 @@ export default class Game {
 
   get money() {
     return this.moneyManager.money
+  }
+
+  get businessUnlocked() {
+    return this.employeeManager.businessUnlocked
   }
 
   get numWorkers() {

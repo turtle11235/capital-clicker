@@ -7,7 +7,7 @@ export type Props = {
   level: number
   moneyCallback: () => number
   baseWageCallback: () => number
-  payCallback: (employee: Employee, amount: number) => void
+  spendCallBack: (employee: Employee, amount: number) => void
   workCallback: () => void
   boss: Employee | null
   employees: Employee[]

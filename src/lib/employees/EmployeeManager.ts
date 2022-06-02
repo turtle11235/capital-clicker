@@ -13,8 +13,6 @@ export default class EmployeeManager {
 
   minWage = 7.5
   wage = 7.5
-  numWorkers = 0
-  numManagers = 0
 
   canFire = false
 
@@ -28,7 +26,7 @@ export default class EmployeeManager {
       level: 1,
       moneyCallback: () => game.money,
       baseWageCallback: () => this.minWage,
-      payCallback: this.pay,
+      spendCallBack: this.spend,
       workCallback: () => {},
       boss: null,
       employees: [],
@@ -40,6 +38,8 @@ export default class EmployeeManager {
   }
 
   hire = () => {
+    console.log("can hire:", this.canHire)
+    console.log("root can hire:", this.root.canHire)
     if (this.canHire) {
       if (this.root.isFull) {
         var props = {
@@ -47,7 +47,9 @@ export default class EmployeeManager {
           ...{ level: this.root.level + 1, employees: [this.root] },
         }
         this.root = EmployeeFactory.createEmployee(props)
-      } else if (this.root.canHire) {
+        this.game.spendMoney(this.root.wage * HIRING_BONUS)
+      }
+      if (this.root.canHire) {
         this.root.hire()
       } else {
         console.log("Failed to hire new employee")
@@ -57,7 +59,9 @@ export default class EmployeeManager {
 
   fire = () => {}
 
-  pay(employee: Employee, amount: number) {
+  spend = (employee: Employee, amount: number) => {
+    console.log("Employee spending money:", employee)
+    console.log("amount", amount)
     if (this.root !== employee) {
       this.game.spendMoney(amount)
     }
@@ -81,6 +85,14 @@ export default class EmployeeManager {
 
   unlockMiddleManagers() {
     this.middleManagersUnlocked = true
+  }
+
+  get numWorkers() {
+    return this.root.numWorkers
+  }
+
+  get numManagers() {
+    return this.root.numManagers - 1
   }
 
   get hireOneCost() {
@@ -114,11 +126,6 @@ export default class EmployeeManager {
   }
 
   get canHire() {
-    console.log(
-      this.businessUnlocked,
-      this.managersUnlocked,
-      this.middleManagersUnlocked
-    )
     if (
       this.middleManagersUnlocked ||
       (this.managersUnlocked && this.root.numManagers < MANAGERS_PER_MANAGER) ||

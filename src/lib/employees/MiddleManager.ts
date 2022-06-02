@@ -24,6 +24,7 @@ export default class MiddleManager extends Manager {
       }
       let employee = EmployeeFactory.createEmployee(employeeProps)
       this.employees.push(employee)
+      this.spendMoney(employee, employee.wage * HIRING_BONUS)
       return employee
     } else {
       throw new Error("out of bounds error, manager has too many employees")
