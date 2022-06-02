@@ -15,13 +15,13 @@ export default abstract class Employee {
   boss: Employee | null
   employees: Employee[]
 
-  abstract hireOneCost: number
-  abstract hireAllCost: number
-  abstract canHire: boolean
-  abstract totalWages: number
-  abstract numWorkers: number
-  abstract numManagers: number
-  abstract isFull: boolean
+  abstract get hireOneCost(): number
+  abstract get hireAllCost(): number
+  abstract get canHire(): boolean
+  abstract get totalWages(): number
+  abstract get numWorkers(): number
+  abstract get numManagers(): number
+  abstract get isFull(): boolean
 
   level: number
   getMoney: () => number

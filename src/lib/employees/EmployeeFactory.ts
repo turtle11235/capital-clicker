@@ -1,6 +1,6 @@
 import Employee from "./Employee"
 import MiddleManager from "./MiddleManager"
-import BaseManager from "./BaseManager"
+import LowerManager from "./LowerManager"
 import Worker from "./Worker"
 
 export type Props = {
@@ -14,12 +14,12 @@ export type Props = {
 }
 
 export default class EmployeeFactory {
-  static createEmployee(props: Props): MiddleManager | BaseManager | Worker {
+  static createEmployee(props: Props): MiddleManager | LowerManager | Worker {
     switch (props.level) {
       case 0:
         return new Worker(props)
       case 1:
-        return new BaseManager(props)
+        return new LowerManager(props)
       default:
         return new MiddleManager(props)
     }

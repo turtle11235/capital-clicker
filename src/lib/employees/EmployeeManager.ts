@@ -114,6 +114,11 @@ export default class EmployeeManager {
   }
 
   get canHire() {
+    console.log(
+      this.businessUnlocked,
+      this.managersUnlocked,
+      this.middleManagersUnlocked
+    )
     if (
       this.middleManagersUnlocked ||
       (this.managersUnlocked && this.root.numManagers < MANAGERS_PER_MANAGER) ||

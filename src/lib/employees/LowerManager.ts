@@ -4,7 +4,7 @@ import Employee from "./Employee"
 import EmployeeFactory from "./EmployeeFactory"
 import Manager from "./Manager"
 
-export default class BaseManager extends Manager {
+export default class LowerManager extends Manager {
   hire(): Employee {
     var employeeProps = {
       ...this.props,
@@ -42,11 +42,11 @@ export default class BaseManager extends Manager {
     )
   }
 
-  get hireOneCost() {
+  get hireOneCost(): number {
     return this.getBaseWage() * HIRING_BONUS
   }
 
-  get hireAllCost() {
+  get hireAllCost(): number {
     return this.hireOneCost * (WORKERS_PER_MANAGER - this.employees.length)
   }
 }
