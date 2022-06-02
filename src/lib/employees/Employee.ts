@@ -4,7 +4,7 @@ export type Props = {
   level: number
   moneyCallback: () => number
   baseWageCallback: () => number
-  payCallback: (amount: number) => void
+  payCallback: (employee: Employee, amount: number) => void
   workCallback: () => void
   boss: Employee | null
   employees: Employee[]
@@ -17,9 +17,11 @@ export default abstract class Employee {
 
   abstract hireOneCost: number
   abstract hireAllCost: number
-
-  numWorkers = 0
-  numManagers = 0
+  abstract canHire: boolean
+  abstract totalWages: number
+  abstract numWorkers: number
+  abstract numManagers: number
+  abstract isFull: boolean
 
   level: number
   getMoney: () => number
@@ -42,12 +44,8 @@ export default abstract class Employee {
 
   abstract fire(): Employee
 
-  abstract canHire: boolean
-
-  abstract totalWages: number
-
   pay = () => {
-    this.props.payCallback(this.wage)
+    this.props.payCallback(this, this.wage)
     for (var subordinate of this.employees) {
       subordinate.pay()
     }

@@ -6,11 +6,28 @@ import {
 } from "../constants"
 import { sum } from "../utils"
 import Employee from "./Employee"
+import EmployeeFactory from "./EmployeeFactory"
 import Manager from "./Manager"
 
 export default class MiddleManager extends Manager {
   hire(): Employee {
-    throw new Error("Method not implemented.")
+    for (let employee of this.employees) {
+      if (employee.canHire) {
+        return employee.hire()
+      }
+    }
+
+    if (!this.isFull) {
+      var employeeProps = {
+        ...this.props,
+        ...{ level: this.level - 1, boss: this, employees: [] },
+      }
+      let employee = EmployeeFactory.createEmployee(employeeProps)
+      this.employees.push(employee)
+      return employee
+    } else {
+      throw new Error("out of bounds error, manager has too many employees")
+    }
   }
 
   fire(): Employee {
@@ -18,11 +35,21 @@ export default class MiddleManager extends Manager {
   }
 
   get canHire(): boolean {
-    if (this.employees.length === MANAGERS_PER_MANAGER) {
+    if (this.isFull) {
       return this.employees.some((employee) => employee.canHire)
-    }
+    } else return this.getMoney() >= this.hireOneCost
+  }
 
-    return false
+  get numWorkers() {
+    return sum(this.employees.map((employee) => employee.numWorkers))
+  }
+
+  get numManagers() {
+    return sum(this.employees.map((employee) => employee.numManagers)) + 1
+  }
+
+  get isFull() {
+    return this.employees.length <= MANAGERS_PER_MANAGER
   }
 
   get totalWages() {

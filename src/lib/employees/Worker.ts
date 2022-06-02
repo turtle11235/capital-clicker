@@ -3,6 +3,8 @@ import Employee from "./Employee"
 export default class Worker extends Employee {
   readonly hireOneCost = NaN
   readonly hireAllCost = NaN
+  readonly numWorkers = 1
+  readonly numManagers = 0
 
   work = () => {
     this.doWork()
@@ -22,5 +24,9 @@ export default class Worker extends Employee {
 
   get totalWages() {
     return this.wage
+  }
+
+  get isFull() {
+    return true
   }
 }
