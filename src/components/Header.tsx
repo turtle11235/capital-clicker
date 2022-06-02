@@ -1,5 +1,5 @@
-import React from "react"
-import { Row, Col } from "react-bootstrap"
+import React from 'react'
+import { Row, Col } from 'react-bootstrap'
 
 type Props = {
   elapsedTime: string
