@@ -3,7 +3,7 @@ import MiddleManager from "./MiddleManager"
 import LowerManager from "./LowerManager"
 import Worker from "./Worker"
 
-export type Props = {
+export type EmployeeProps = {
   level: number
   moneyCallback: () => number
   baseWageCallback: () => number
@@ -14,7 +14,9 @@ export type Props = {
 }
 
 export default class EmployeeFactory {
-  static createEmployee(props: Props): MiddleManager | LowerManager | Worker {
+  static createEmployee(
+    props: EmployeeProps
+  ): MiddleManager | LowerManager | Worker {
     switch (props.level) {
       case 0:
         return new Worker(props)

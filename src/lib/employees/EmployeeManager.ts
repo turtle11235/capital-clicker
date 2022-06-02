@@ -27,7 +27,9 @@ export default class EmployeeManager {
       moneyCallback: () => game.money,
       baseWageCallback: () => this.minWage,
       spendCallBack: this.spend,
-      workCallback: () => {},
+      workCallback: () => {
+        this.game.workerClick()
+      },
       boss: null,
       employees: [],
     })

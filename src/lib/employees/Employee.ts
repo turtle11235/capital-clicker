@@ -1,17 +1,8 @@
 import { FIRING_MULTIPLIER, MANAGER_SALARY_MULTIPLIER } from "../constants"
-
-export type Props = {
-  level: number
-  moneyCallback: () => number
-  baseWageCallback: () => number
-  spendCallBack: (employee: Employee, amount: number) => void
-  workCallback: () => void
-  boss: Employee | null
-  employees: Employee[]
-}
+import { EmployeeProps } from "./EmployeeFactory"
 
 export default abstract class Employee {
-  props: Props
+  props: EmployeeProps
   boss: Employee | null
   employees: Employee[]
 
@@ -29,7 +20,7 @@ export default abstract class Employee {
   spendMoney: (employee: Employee, amount: number) => void
   doWork: () => void
 
-  constructor(props: Props) {
+  constructor(props: EmployeeProps) {
     this.props = props
     this.level = props.level
     this.getMoney = props.moneyCallback

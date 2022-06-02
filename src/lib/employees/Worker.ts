@@ -1,3 +1,4 @@
+import { WORKER_CLICKS_PER_SECOND } from "../constants"
 import Employee from "./Employee"
 
 export default class Worker extends Employee {
@@ -6,8 +7,20 @@ export default class Worker extends Employee {
   readonly numWorkers = 1
   readonly numManagers = 0
 
+  prevWorkTime = 0
+
+  workPeriodHasElapsed = () => {
+    let elapsedTimeInSeconds = (Date.now() - this.prevWorkTime) / 1000
+    if (elapsedTimeInSeconds >= 1 / WORKER_CLICKS_PER_SECOND) {
+      this.prevWorkTime = Date.now()
+      return true
+    } else return false
+  }
+
   work = () => {
-    this.doWork()
+    if (this.workPeriodHasElapsed()) {
+      this.doWork()
+    }
   }
 
   hire = () => {

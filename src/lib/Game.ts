@@ -43,7 +43,7 @@ export default class Game {
   }
 
   gameLoop = () => {
-    // this.employeeManager.execute()
+    this.employeeManager.execute()
     this.updateApp()
   }
 
@@ -68,8 +68,8 @@ export default class Game {
     this.startGame()
   }
 
-  workerClick = () => {
-    this.moneyManager.workerClick()
+  workerClick = (n?: number) => {
+    this.moneyManager.workerClick(n)
   }
 
   setUserClickVal(amount: number) {
