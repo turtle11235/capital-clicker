@@ -40,41 +40,33 @@ export default class EmployeeManager {
   }
 
   hire = () => {
-    console.log("can hire:", this.canHire)
-    console.log("root can hire:", this.root.canHire)
     if (this.canHire) {
-      if (this.root.isFull) {
+      if (this.root.isFull && !this.root.canHire) {
+        let oldRoot = this.root
         var props = {
           ...this.root.props,
           ...{ level: this.root.level + 1, employees: [this.root] },
         }
         this.root = EmployeeFactory.createEmployee(props)
-        this.game.spendMoney(this.root.wage * HIRING_BONUS)
+        this.spend(oldRoot, oldRoot.wage * HIRING_BONUS)
       }
+
       if (this.root.canHire) {
         this.root.hire()
       } else {
         console.log("Failed to hire new employee")
       }
+
+      console.log(this.root)
     }
   }
 
   fire = () => {}
 
   spend = (employee: Employee, amount: number) => {
-    console.log("Employee spending money:", employee)
-    console.log("amount", amount)
     if (this.root !== employee) {
       this.game.spendMoney(amount)
     }
-  }
-
-  getNumWorkers() {
-    return this.numWorkers
-  }
-
-  getNumManagers() {
-    return this.numManagers
   }
 
   unlockBusiness() {
@@ -99,12 +91,12 @@ export default class EmployeeManager {
 
   get hireOneCost() {
     /*
-      if the root is full, the cost will include the cost of hiring a manager
+      if the root is full, the cost will include the cost of hiring 2 managers
       at the level of the root (including hiring bonus)
     */
     let cost = this.root.hireOneCost
-    if (this.root.isFull) {
-      return cost + this.root.wage * HIRING_BONUS
+    if (this.root.isFull && !this.root.canHire) {
+      return cost + this.root.wage * HIRING_BONUS * 2
     } else {
       return cost
     }
@@ -128,12 +120,19 @@ export default class EmployeeManager {
   }
 
   get canHire() {
-    if (
-      this.middleManagersUnlocked ||
-      (this.managersUnlocked && this.root.numManagers < MANAGERS_PER_MANAGER) ||
-      (this.businessUnlocked && this.root.numWorkers < WORKERS_PER_MANAGER)
-    ) {
-      return this.root.canHire || this.game.money >= this.hireOneCost
+    console.log(
+      this.middleManagersUnlocked,
+      this.managersUnlocked,
+      this.businessUnlocked
+    )
+    if (this.root.canHire) {
+      return true
+    } else if (this.game.money >= this.hireOneCost) {
+      return (
+        this.middleManagersUnlocked ||
+        (this.managersUnlocked && this.numManagers < MANAGERS_PER_MANAGER) ||
+        (this.businessUnlocked && this.numWorkers < WORKERS_PER_MANAGER)
+      )
     } else {
       return false
     }

@@ -15,6 +15,7 @@ type State = {
   upgrades: Upgrade[]
   minWage: number
   wage: number
+  hireOneCost: number
   numWorkers: number
   numManagers: number
   canHire: boolean
@@ -35,6 +36,7 @@ export default class App extends Component<{}, State> {
       upgrades: [],
       minWage: 0,
       wage: 0,
+      hireOneCost: 0,
       numWorkers: 0,
       numManagers: 0,
       canHire: false,
@@ -65,10 +67,10 @@ export default class App extends Component<{}, State> {
               <Button
                 className="py-4 w-50 m-auto"
                 variant="secondary"
-                onClick={(e) => {
+                onClick={() => {
                   this.game.userClick()
-                  const button = e.target as HTMLButtonElement
-                  button.blur()
+                  // const button = e.target as HTMLButtonElement
+                  // button.blur()
                 }}
                 onMouseDown={(e) => {
                   const button = e.target as HTMLButtonElement
@@ -89,6 +91,7 @@ export default class App extends Component<{}, State> {
               numWorkers={this.state.numWorkers}
               numManagers={this.state.numManagers}
               minWage={formatNumber(this.state.minWage)}
+              hireOneCost={formatNumber(this.state.hireOneCost)}
               // wage={formatNumber(this.state.wage)}
               canFire={this.state.canFire}
               canHire={this.state.canHire}

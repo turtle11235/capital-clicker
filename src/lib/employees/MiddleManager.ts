@@ -25,6 +25,7 @@ export default class MiddleManager extends Manager {
       let employee = EmployeeFactory.createEmployee(employeeProps)
       this.employees.push(employee)
       this.spendMoney(employee, employee.wage * HIRING_BONUS)
+      employee.hire()
       return employee
     } else {
       throw new Error("out of bounds error, manager has too many employees")
@@ -50,7 +51,7 @@ export default class MiddleManager extends Manager {
   }
 
   get isFull() {
-    return this.employees.length <= MANAGERS_PER_MANAGER
+    return this.employees.length >= MANAGERS_PER_MANAGER
   }
 
   get totalWages() {
@@ -67,6 +68,7 @@ export default class MiddleManager extends Manager {
     } else {
       /*
         Calculating the hiring cost:
+
         b = base wage
         m = manager salary multiplier
         h = hiring bonus
@@ -76,8 +78,8 @@ export default class MiddleManager extends Manager {
       */
       var summedCosts = 0
       for (var i = 0; i < this.level; i++) {
-        var salaryMultiplier = Math.pow(MANAGER_SALARY_MULTIPLIER, i)
-        var cost = this.getBaseWage() * salaryMultiplier * HIRING_BONUS
+        let salaryMultiplier = Math.pow(MANAGER_SALARY_MULTIPLIER, i)
+        let cost = this.getBaseWage() * salaryMultiplier * HIRING_BONUS
         summedCosts += cost
       }
       return summedCosts

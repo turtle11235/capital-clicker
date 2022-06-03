@@ -53,6 +53,7 @@ export default class Game {
       upgrades: this.upgradeManager.upgrades,
       minWage: this.employeeManager.minWage,
       wage: this.employeeManager.wage,
+      hireOneCost: this.employeeManager.hireOneCost,
       numWorkers: this.employeeManager.numWorkers,
       numManagers: this.employeeManager.numManagers,
       canHire: this.employeeManager.canHire,
