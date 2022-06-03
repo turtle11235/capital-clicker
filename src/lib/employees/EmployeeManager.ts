@@ -2,10 +2,22 @@ import {
   HIRING_BONUS,
   MANAGERS_PER_MANAGER,
   WORKERS_PER_MANAGER,
+  WORKER_SECONDS_PER_PAYDAY,
 } from "../constants"
 import Game from "../Game"
+import { ticksToSeconds } from "../utils"
 import Employee from "./Employee"
 import EmployeeFactory from "./EmployeeFactory"
+
+/*
+TODO: 
+  -Firing
+  -Payday
+  -Quitting
+  -Scale hiring costs based on worker click upgrades
+  -Upgrades: hire individual workers and managers -> hire worker and all managers -> hire manager and all workers
+
+*/
 
 export default class EmployeeManager {
   game: Game
@@ -13,6 +25,8 @@ export default class EmployeeManager {
 
   minWage = 7.5
   wage = 7.5
+
+  prevPayTime = 0
 
   canFire = false
 
@@ -37,6 +51,16 @@ export default class EmployeeManager {
 
   execute = () => {
     this.root.work()
+    if (this.payPeriodHasElapsed()) {
+      this.root.pay()
+    }
+  }
+
+  payPeriodHasElapsed = () => {
+    if (ticksToSeconds(this.game.counter) % WORKER_SECONDS_PER_PAYDAY === 0) {
+      console.log("PAYDAY")
+      return true
+    } else return false
   }
 
   hire = () => {
