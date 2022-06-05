@@ -21,39 +21,44 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "arrow-parens": [
-      "error",
-      "always"
-    ],
-    "arrow-spacing": [
-      "error",
-      {
-        "before": true,
-        "after": true
-      }
-    ],
-    "block-spacing": [
-      "error",
-      "always"
-    ],
-    "brace-style": [
-      "error",
-      "stroustrup"
-    ],
-    "indent": [
-      "error",
-      2
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    "array-element-newline": ["error", { "multiline": true }],
+    "arrow-parens": ["error"],
+    "arrow-spacing": ["error"],
+    "block-spacing": ["error"],
+    "brace-style": ["error", "stroustrup"],
+    "comma-spacing": ["error"],
+    "curly": ["error"],
+    "dot-location": ["error", "property"],
+    "func-call-spacing": ["error"],
+    "indent": ["error", 2],
+    "key-spacing": ["error"],
+    "keyword-spacing": ["error"],
+    "multiline-ternary": ["error", "never"],
     "no-empty-function": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/ban-types": "off"
+    "no-multi-spaces": ["error"],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
+    "no-trailing-spaces": ["error"],
+    "no-whitespace-before-property": ["error"],
+    "object-curly-spacing": ["error", "always"],
+    "operator-linebreak": ["error", "before"],
+    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "rest-spread-spacing": ["error"],
+    "semi": ["error", "never"],
+    "space-before-blocks": ["error"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "space-in-parens": ["error"],
+    "space-infix-ops": ["error"],
+    "space-unary-ops": ["error", {
+        "words": true,
+        "nonwords": false
+    }],
+    "switch-colon-spacing": ["error"],
+    "template-curly-spacing": ["error"],
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-function": "off"
   }
 }

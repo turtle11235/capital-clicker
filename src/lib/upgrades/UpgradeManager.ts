@@ -32,7 +32,9 @@ export default class UpgradeManager {
       description: 'Begin research into improving the money-making machine',
       trigger: () => {
         const canBuy = this.game.totalMoney >= 0.1
-        if (canBuy) this.upgradesEnabled = true
+        if (canBuy) {
+          this.upgradesEnabled = true
+        }
         return canBuy
       },
     })
@@ -180,9 +182,7 @@ export default class UpgradeManager {
       description: `Managers make ${MANAGER_SALARY_MULTIPLIER}x workers' wages and oversee up to ${WORKERS_PER_MANAGER} workers`,
       trigger: () => {
         return (
-          u5.used &&
-          this.game.numWorkers >= WORKERS_PER_MANAGER &&
-          this.game.totalMoney >= 100
+          u5.used && this.game.numWorkers >= WORKERS_PER_MANAGER && this.game.totalMoney >= 100
         )
       },
       effect: () => {
@@ -201,9 +201,7 @@ export default class UpgradeManager {
       description: `Middle-managers make ${MANAGER_SALARY_MULTIPLIER}x their subordinates' wages and oversee up to ${MANAGERS_PER_MANAGER} managers`,
       trigger: () => {
         return (
-          u10.used &&
-          this.game.numWorkers >= WORKERS_PER_MANAGER * MANAGERS_PER_MANAGER &&
-          this.game.totalMoney >= 200
+          u10.used && this.game.numWorkers >= WORKERS_PER_MANAGER * MANAGERS_PER_MANAGER && this.game.totalMoney >= 200
         )
       },
       effect: () => {
