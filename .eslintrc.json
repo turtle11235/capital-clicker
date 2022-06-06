@@ -59,6 +59,7 @@
     "switch-colon-spacing": ["error"],
     "template-curly-spacing": ["error"],
     "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/no-empty-function": "off"
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }
