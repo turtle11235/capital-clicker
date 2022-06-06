@@ -1,6 +1,10 @@
 import { TICKS_PER_SECOND } from './constants'
 
 export function formatNumber(number: number) {
+  const isNegative = number < 0
+  if (isNegative) {
+    number = number * -1
+  }
   let numberString = number.toFixed(2)
   const startIndex
     = numberString.indexOf('.') > 0 ? numberString.indexOf('.') : numberString.length
@@ -13,6 +17,9 @@ export function formatNumber(number: number) {
         + numberString.slice(i, numberString.length)
     }
     count++
+  }
+  if (isNegative) {
+    numberString = '-' + numberString
   }
   return numberString
 }
