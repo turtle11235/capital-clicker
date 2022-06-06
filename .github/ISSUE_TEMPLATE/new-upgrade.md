@@ -1,8 +1,8 @@
 ---
 name: New Upgrade
-about: For creating a new upgrade
+about: Basic info for creating a new upgrade
 title: ''
-labels: upgrade
+labels: enhancement, upgrade
 assignees: ''
 
 ---
