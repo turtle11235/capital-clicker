@@ -1,18 +1,16 @@
-import { TICKS_PER_SECOND } from "./constants"
+import { TICKS_PER_SECOND } from './constants'
 
 export function formatNumber(number: number) {
-  var numberString = number.toFixed(2)
-  var startIndex =
-    numberString.indexOf(".") > 0
-      ? numberString.indexOf(".")
-      : numberString.length
-  var count = 0
-  for (var i = startIndex; i > 0; i--) {
+  let numberString = number.toFixed(2)
+  const startIndex
+    = numberString.indexOf('.') > 0 ? numberString.indexOf('.') : numberString.length
+  let count = 0
+  for (let i = startIndex; i > 0; i--) {
     if (count && count % 3 === 0) {
-      numberString =
-        numberString.slice(0, i) +
-        "," +
-        numberString.slice(i, numberString.length)
+      numberString
+        = numberString.slice(0, i)
+        + ','
+        + numberString.slice(i, numberString.length)
     }
     count++
   }
@@ -24,21 +22,22 @@ export function ticksToSeconds(ticks: number) {
 }
 
 export function displayElapsedTime(seconds: number) {
-  var minutes = Math.floor(seconds / 60)
+  let minutes = Math.floor(seconds / 60)
   seconds = seconds % 60
-  var hours = Math.floor(minutes / 60)
+  const hours = Math.floor(minutes / 60)
   minutes = minutes % 60
 
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
     2,
-    "0"
-  )}:${seconds < 10 ? "0" : ""}${seconds.toFixed(2)}`
+    '0'
+  )}:${seconds < 10 ? '0' : ''}${seconds.toFixed(2)}`
 }
 
 export function sum(...numbers: number[] | number[][]): number {
-  if (typeof numbers[0] === "number") {
+  if (typeof numbers[0] === 'number') {
     return (numbers as number[]).reduce((a, b) => a + b, 0)
-  } else {
+  }
+  else {
     return numbers[0].reduce((a, b) => a + b, 0)
   }
 }
