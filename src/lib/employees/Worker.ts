@@ -1,5 +1,6 @@
-import { WORKER_CLICKS_PER_SECOND } from "../constants"
-import Employee from "./Employee"
+import { FIRING_MULTIPLIER, WORKER_CLICKS_PER_SECOND } from '../constants'
+import { ticksToSeconds } from '../utils'
+import Employee from './Employee'
 
 export default class Worker extends Employee {
   readonly hireOneCost = NaN
@@ -10,11 +11,14 @@ export default class Worker extends Employee {
   prevWorkTime = 0
 
   workPeriodHasElapsed = () => {
-    let elapsedTimeInSeconds = (Date.now() - this.prevWorkTime) / 1000
+    const elapsedTimeInSeconds = ticksToSeconds(this.getCounter() - this.prevWorkTime)
     if (elapsedTimeInSeconds >= 1 / WORKER_CLICKS_PER_SECOND) {
-      this.prevWorkTime = Date.now()
+      this.prevWorkTime = this.getCounter()
       return true
-    } else return false
+    }
+    else {
+      return false
+    }
   }
 
   work = () => {
@@ -27,12 +31,20 @@ export default class Worker extends Employee {
     return this
   }
 
-  fire = () => {
-    return this
+  fire(employee?: Employee): Employee {
+    if (employee) {
+      throw new Error('Worker cannot fire specific employees')
+    }
+
+    return this.boss!.fire(this)
   }
 
   get canHire() {
     return false
+  }
+
+  get canFire() {
+    return this.getMoney() >= this.wage * FIRING_MULTIPLIER
   }
 
   get totalWages() {

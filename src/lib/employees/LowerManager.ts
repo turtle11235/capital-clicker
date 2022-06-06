@@ -1,27 +1,23 @@
-import { HIRING_BONUS, WORKERS_PER_MANAGER } from "../constants"
-import { sum } from "../utils"
-import Employee from "./Employee"
-import EmployeeFactory from "./EmployeeFactory"
-import Manager from "./Manager"
+import { HIRING_BONUS, WORKERS_PER_MANAGER } from '../constants'
+import { sum } from '../utils'
+import Employee from './Employee'
+import EmployeeFactory from './EmployeeFactory'
+import Manager from './Manager'
 
 export default class LowerManager extends Manager {
   hire(): Employee {
-    var employeeProps = {
+    const employeeProps = {
       ...this.props,
       ...{ level: this.level - 1, boss: this, employees: [] },
     }
-    var employee = EmployeeFactory.createEmployee(employeeProps)
+    const employee = EmployeeFactory.createEmployee(employeeProps)
     this.employees.push(employee)
     this.spendMoney(employee, employee.wage * HIRING_BONUS)
     return employee
   }
 
-  fire(): Employee {
-    return this.employees.pop()!
-  }
-
   get canHire() {
-    var hasFunds = this.getMoney() >= this.hireOneCost
+    const hasFunds = this.getMoney() >= this.hireOneCost
     return !this.isFull && hasFunds
   }
 

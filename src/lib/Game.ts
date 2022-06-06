@@ -140,7 +140,8 @@ export default class Game {
   get upgradesUnlocked() {
     if (this.totalMoney > 0.74) {
       return true
-    } else {
+    }
+    else {
       return false
     }
   }

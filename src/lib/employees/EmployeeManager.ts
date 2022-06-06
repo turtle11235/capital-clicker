@@ -2,10 +2,10 @@ import {
   HIRING_BONUS,
   MANAGERS_PER_MANAGER,
   WORKERS_PER_MANAGER,
-} from "../constants"
-import Game from "../Game"
-import Employee from "./Employee"
-import EmployeeFactory from "./EmployeeFactory"
+} from '../constants'
+import Game from '../Game'
+import Employee from './Employee'
+import EmployeeFactory from './EmployeeFactory'
 
 export default class EmployeeManager {
   game: Game
@@ -13,8 +13,6 @@ export default class EmployeeManager {
 
   minWage = 7.5
   wage = 7.5
-
-  canFire = false
 
   businessUnlocked = false
   managersUnlocked = false
@@ -30,6 +28,7 @@ export default class EmployeeManager {
       workCallback: () => {
         this.game.workerClick()
       },
+      counterCallback: () => game.counter,
       boss: null,
       employees: [],
     })
@@ -42,26 +41,31 @@ export default class EmployeeManager {
   hire = () => {
     if (this.canHire) {
       if (this.root.isFull && !this.root.canHire) {
-        let oldRoot = this.root
-        var props = {
+        const oldRoot = this.root
+        const props = {
           ...this.root.props,
           ...{ level: this.root.level + 1, employees: [this.root] },
         }
         this.root = EmployeeFactory.createEmployee(props)
+        oldRoot.boss = this.root
         this.spend(oldRoot, oldRoot.wage * HIRING_BONUS)
       }
 
       if (this.root.canHire) {
         this.root.hire()
-      } else {
-        console.log("Failed to hire new employee")
+      }
+      else {
+        console.log('Failed to hire new employee')
       }
 
       console.log(this.root)
     }
   }
 
-  fire = () => {}
+  fire = () => {
+    this.root.fire()
+    console.log(this.root)
+  }
 
   spend = (employee: Employee, amount: number) => {
     if (this.root !== employee) {
@@ -94,10 +98,11 @@ export default class EmployeeManager {
       if the root is full, the cost will include the cost of hiring 2 managers
       at the level of the root (including hiring bonus)
     */
-    let cost = this.root.hireOneCost
+    const cost = this.root.hireOneCost
     if (this.root.isFull && !this.root.canHire) {
       return cost + this.root.wage * HIRING_BONUS * 2
-    } else {
+    }
+    else {
       return cost
     }
   }
@@ -108,33 +113,36 @@ export default class EmployeeManager {
       at the level of the root and all of its sub-managers (minus the one that
       already exists)
     */
-    let cost = this.root.hireAllCost
+    const cost = this.root.hireAllCost
     if (this.root.isFull) {
-      var newBossCost = this.root.wage * HIRING_BONUS
-      var subManagersCost =
-        this.root.employees[0].wage * (MANAGERS_PER_MANAGER - 1) * HIRING_BONUS
+      const newBossCost = this.root.wage * HIRING_BONUS
+      const subManagersCost
+        = this.root.employees[0].wage * (MANAGERS_PER_MANAGER - 1) * HIRING_BONUS
       return cost + newBossCost + subManagersCost
-    } else {
+    }
+    else {
       return cost
     }
   }
 
   get canHire() {
-    console.log(
-      this.middleManagersUnlocked,
-      this.managersUnlocked,
-      this.businessUnlocked
-    )
+
     if (this.root.canHire) {
       return true
-    } else if (this.game.money >= this.hireOneCost) {
+    }
+    else if (this.game.money >= this.hireOneCost) {
       return (
-        this.middleManagersUnlocked ||
-        (this.managersUnlocked && this.numManagers < MANAGERS_PER_MANAGER) ||
-        (this.businessUnlocked && this.numWorkers < WORKERS_PER_MANAGER)
+        this.middleManagersUnlocked
+        || (this.managersUnlocked && this.numManagers < MANAGERS_PER_MANAGER)
+        || (this.businessUnlocked && this.numWorkers < WORKERS_PER_MANAGER)
       )
-    } else {
+    }
+    else {
       return false
     }
+  }
+
+  get canFire() {
+    return this.root.canFire
   }
 }
