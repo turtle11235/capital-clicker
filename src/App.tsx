@@ -92,7 +92,6 @@ export default class App extends Component<{}, State> {
               numManagers={this.state.numManagers}
               minWage={formatNumber(this.state.minWage)}
               hireOneCost={formatNumber(this.state.hireOneCost)}
-              // wage={formatNumber(this.state.wage)}
               canFire={this.state.canFire}
               canHire={this.state.canHire}
               fireWorker={() => {
@@ -101,24 +100,12 @@ export default class App extends Component<{}, State> {
               hireWorker={() => {
                 this.game.hireWorker()
               }}
-            // canHireWorker={this.state.canHireWorker}
-            // canHireManager={this.state.canHireManager}
-            // hireWorkerHandler={this.game.hireWorker}
-            // fireWorkerHandler={this.game.fireWorker}
-            // hireManagerHandler={this.game.hireManager}
-            // fireManagerHandler={this.game.fireManager}
-            // raiseWagesHandler={this.game.raiseWages}
-            // lowerWagesHandler={this.game.lowerWages}
-            // canLowerWages={this.game.wage > this.game.minWage}
-            // managersUnlocked={this.game.managersUnlocked}
             />
           </Col>
           <Col className="px-4">
             <UpgradesModule
               trigger={this.game.upgradesUnlocked}
               upgrades={this.state.upgrades}
-            // upgradeHandler={this.game.completeUpgrade}
-            // upgradeHandler={()=>{}}
             />
           </Col>
         </Row>
