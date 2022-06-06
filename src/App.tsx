@@ -1,14 +1,14 @@
-import "./App.css"
-import React, { Component } from "react"
-import Upgrade from "./lib/upgrades/Upgrade"
-import { Container, Row, Col, Button } from "react-bootstrap"
-import BusinessModule from "./components/gameModules/BusinessModule"
-import UpgradesModule from "./components/gameModules/UpgradesModule"
-import Header from "./components/Header"
-import { formatNumber } from "./lib/utils"
-import Game from "./lib/Game"
+import './App.css'
+import React, { Component } from 'react'
+import Upgrade from './lib/upgrades/Upgrade'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import BusinessModule from './components/gameModules/BusinessModule'
+import UpgradesModule from './components/gameModules/UpgradesModule'
+import Header from './components/Header'
+import { formatNumber } from './lib/utils'
+import Game from './lib/Game'
 
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 type State = {
   money: number
@@ -41,8 +41,8 @@ export default class App extends Component<{}, State> {
       numManagers: 0,
       canHire: false,
       canFire: false,
-      elapsedTime: "0:0:0",
-      time: "0:0:0",
+      elapsedTime: '0:0:0',
+      time: '0:0:0',
       day: 0,
     }
   }
@@ -74,13 +74,13 @@ export default class App extends Component<{}, State> {
                 }}
                 onMouseDown={(e) => {
                   const button = e.target as HTMLButtonElement
-                  button.classList.remove("btn-secondary")
-                  button.classList.add("btn-danger")
+                  button.classList.remove('btn-secondary')
+                  button.classList.add('btn-danger')
                 }}
                 onMouseUp={(e) => {
                   const button = e.target as HTMLButtonElement
-                  button.classList.remove("btn-danger")
-                  button.classList.add("btn-secondary")
+                  button.classList.remove('btn-danger')
+                  button.classList.add('btn-secondary')
                 }}
               >
                 Make Money
@@ -101,24 +101,24 @@ export default class App extends Component<{}, State> {
               hireWorker={() => {
                 this.game.hireWorker()
               }}
-              // canHireWorker={this.state.canHireWorker}
-              // canHireManager={this.state.canHireManager}
-              // hireWorkerHandler={this.game.hireWorker}
-              // fireWorkerHandler={this.game.fireWorker}
-              // hireManagerHandler={this.game.hireManager}
-              // fireManagerHandler={this.game.fireManager}
-              // raiseWagesHandler={this.game.raiseWages}
-              // lowerWagesHandler={this.game.lowerWages}
-              // canLowerWages={this.game.wage > this.game.minWage}
-              // managersUnlocked={this.game.managersUnlocked}
+            // canHireWorker={this.state.canHireWorker}
+            // canHireManager={this.state.canHireManager}
+            // hireWorkerHandler={this.game.hireWorker}
+            // fireWorkerHandler={this.game.fireWorker}
+            // hireManagerHandler={this.game.hireManager}
+            // fireManagerHandler={this.game.fireManager}
+            // raiseWagesHandler={this.game.raiseWages}
+            // lowerWagesHandler={this.game.lowerWages}
+            // canLowerWages={this.game.wage > this.game.minWage}
+            // managersUnlocked={this.game.managersUnlocked}
             />
           </Col>
           <Col className="px-4">
             <UpgradesModule
               trigger={this.game.upgradesUnlocked}
               upgrades={this.state.upgrades}
-              // upgradeHandler={this.game.completeUpgrade}
-              // upgradeHandler={()=>{}}
+            // upgradeHandler={this.game.completeUpgrade}
+            // upgradeHandler={()=>{}}
             />
           </Col>
         </Row>

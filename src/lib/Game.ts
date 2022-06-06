@@ -1,9 +1,9 @@
-import App from "../App"
-import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from "./constants"
-import EmployeeManager from "./employees/EmployeeManager"
-import MoneyManager from "./money/MoneyManager"
-import UpgradeManager from "./upgrades/UpgradeManager"
-import { displayElapsedTime, ticksToSeconds } from "./utils"
+import App from '../App'
+import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from './constants'
+import EmployeeManager from './employees/EmployeeManager'
+import MoneyManager from './money/MoneyManager'
+import UpgradeManager from './upgrades/UpgradeManager'
+import { displayElapsedTime, ticksToSeconds } from './utils'
 
 export default class Game {
   app: App
@@ -26,7 +26,7 @@ export default class Game {
     if (!this.running) {
       this.run()
       this.running = true
-      this.startGame = () => {}
+      this.startGame = () => { }
     }
   }
 
@@ -150,18 +150,13 @@ export default class Game {
   }
 
   get time() {
-    var seconds =
-      (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) %
-      (60 * 60 * 24)
+    const seconds = (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) % (60 * 60 * 24)
     return displayElapsedTime(seconds)
   }
 
   get day() {
     return Math.floor(
-      (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) /
-        60 /
-        60 /
-        24
+      (ticksToSeconds(this.counter) * IRL_TO_INGAME_TIME_MULTIPLIER) / 60 / 60 / 24
     )
   }
 }
