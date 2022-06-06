@@ -11,13 +11,8 @@ export default class Game {
   counter = 0
   counterID = 0
 
-  businessUnlocked = false
-
   private moneyManager = new MoneyManager()
-  private employeeManager = new EmployeeManager(
-    this.moneyManager.workerClick,
-    this.moneyManager.spendMoney
-  )
+  private employeeManager = new EmployeeManager(this)
   private upgradeManager = new UpgradeManager(this)
 
   running = false
@@ -48,7 +43,7 @@ export default class Game {
   }
 
   gameLoop = () => {
-    // this.employeeManager.execute()
+    this.employeeManager.execute()
     this.updateApp()
   }
 
@@ -58,6 +53,7 @@ export default class Game {
       upgrades: this.upgradeManager.upgrades,
       minWage: this.employeeManager.minWage,
       wage: this.employeeManager.wage,
+      hireOneCost: this.employeeManager.hireOneCost,
       numWorkers: this.employeeManager.numWorkers,
       numManagers: this.employeeManager.numManagers,
       canHire: this.employeeManager.canHire,
@@ -73,8 +69,8 @@ export default class Game {
     this.startGame()
   }
 
-  workerClick = () => {
-    this.moneyManager.workerClick()
+  workerClick = (n?: number) => {
+    this.moneyManager.workerClick(n)
   }
 
   setUserClickVal(amount: number) {
@@ -94,15 +90,15 @@ export default class Game {
   }
 
   unlockBusiness = () => {
-    this.businessUnlocked = true
+    this.employeeManager.unlockBusiness()
   }
 
   unlockManagers = () => {
-    this.employeeManager.managersUnlocked = true
+    this.employeeManager.unlockManagers()
   }
 
   unlockMiddleManagers = () => {
-    this.employeeManager.middleManagersUnlocked = true
+    this.employeeManager.unlockMiddleManagers()
   }
 
   hireWorker = () => {
@@ -113,12 +109,16 @@ export default class Game {
     this.employeeManager.fire()
   }
 
-  get money() {
-    return this.moneyManager.getMoney()
+  get totalMoney() {
+    return this.moneyManager.totalMoney
   }
 
-  get totalMoney() {
-    return this.moneyManager.getTotalMoney()
+  get money() {
+    return this.moneyManager.money
+  }
+
+  get businessUnlocked() {
+    return this.employeeManager.businessUnlocked
   }
 
   get numWorkers() {
@@ -138,7 +138,12 @@ export default class Game {
   }
 
   get upgradesUnlocked() {
-    return this.upgradeManager.upgradesEnabled
+    if (this.totalMoney > 0.74) {
+      return true
+    }
+    else {
+      return false
+    }
   }
 
   get elapsedTime() {

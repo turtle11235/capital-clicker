@@ -1,12 +1,13 @@
-import React from "react"
-import { Component } from "react"
-import { Row, Col, Button } from "react-bootstrap"
-import BaseModule from "./BaseModule"
+import React from 'react'
+import { Component } from 'react'
+import { Row, Col, Button } from 'react-bootstrap'
+import BaseModule from './BaseModule'
 
 type Props = {
   trigger: boolean
   className?: string
   minWage: string
+  hireOneCost: string
   fireWorker: () => void
   hireWorker: () => void
   canFire: boolean
@@ -27,7 +28,7 @@ export default class BusinessModule extends Component<Props, State> {
       >
         <Row className="text-left">
           <Col className="w-100 text-left">
-            <>Minimum wage: ${this.props.minWage}/hr</>
+            <>Cost to hire 1: ${this.props.hireOneCost}</>
           </Col>
         </Row>
 
