@@ -9,14 +9,6 @@ import { ticksToSeconds } from '../utils'
 import Employee from './Employee'
 import EmployeeFactory from './EmployeeFactory'
 
-/*
-TODO:
-  -Scale hiring costs based on worker click upgrades
-  -Upgrades: hire individual workers and managers -> hire worker and all managers -> hire manager and all workers
-  -Upgrades: choose payday frequency (btw 1 day and 2 weeks)
-  -Give Employees names and titles
-*/
-
 export default class EmployeeManager {
   game: Game
   root: Employee
