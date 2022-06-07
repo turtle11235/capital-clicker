@@ -276,5 +276,22 @@ export default class UpgradeManager {
       },
     })
     this._upgrades.push(u15)
+
+    const u16 = new Upgrade({
+      title: 'Marketing Division',
+      pricetag: '($1000)',
+      description: 'Marketing generates social capital, which can facilitate social interactions',
+      trigger: () => {
+        return this.game.middleManagersUnlocked
+      },
+      effect: () => {
+        this.game.spendMoney(1000)
+        this.game.unlockMarketing()
+      },
+      cost: () => {
+        return this.game.money >= 1000
+      },
+    })
+    this._upgrades.push(u16)
   }
 }

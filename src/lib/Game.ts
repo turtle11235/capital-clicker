@@ -1,6 +1,7 @@
 import App from '../App'
 import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from './constants'
 import EmployeeManager from './employees/EmployeeManager'
+import MarketingManager from './marketing/MarketingManager'
 import MoneyManager from './money/MoneyManager'
 import UpgradeManager from './upgrades/UpgradeManager'
 import { displayElapsedTime, ticksToSeconds } from './utils'
@@ -14,6 +15,7 @@ export default class Game {
   private moneyManager = new MoneyManager()
   private employeeManager = new EmployeeManager(this)
   private upgradeManager = new UpgradeManager(this)
+  private marketingManager = new MarketingManager(this)
 
   running = false
 
@@ -44,12 +46,16 @@ export default class Game {
 
   gameLoop = () => {
     this.employeeManager.execute()
+    this.marketingManager.execute()
     this.updateApp()
   }
 
   updateApp = () => {
     this.app.update({
       money: this.moneyManager.money,
+      socialCapital: this.marketingManager.getSocialCapital(),
+      marketingBudget: this.marketingManager.budget,
+      maxMarketingBudget: this.marketingManager.maxBudget,
       upgrades: this.upgradeManager.upgrades,
       minWage: this.employeeManager.minWage,
       wage: this.employeeManager.wage,
@@ -109,6 +115,14 @@ export default class Game {
     this.employeeManager.fire()
   }
 
+  unlockMarketing = () => {
+    this.marketingManager.marketingUnlocked = true
+  }
+
+  setMarketingBudget = (budget: number) => {
+    this.marketingManager.budget = budget
+  }
+
   get totalMoney() {
     return this.moneyManager.totalMoney
   }
@@ -119,6 +133,14 @@ export default class Game {
 
   get businessUnlocked() {
     return this.employeeManager.businessUnlocked
+  }
+
+  get managersUnlocked() {
+    return this.employeeManager.managersUnlocked
+  }
+
+  get middleManagersUnlocked() {
+    return this.employeeManager.middleManagersUnlocked
   }
 
   get numWorkers() {
@@ -144,6 +166,10 @@ export default class Game {
     else {
       return false
     }
+  }
+
+  get marketingUnlocked() {
+    return this.marketingManager.marketingUnlocked
   }
 
   get elapsedTime() {

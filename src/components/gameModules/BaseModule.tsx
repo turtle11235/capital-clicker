@@ -1,6 +1,6 @@
-import React from "react"
-import { Component, ReactNode } from "react"
-import { Row } from "react-bootstrap"
+import React from 'react'
+import { Component, ReactNode } from 'react'
+import { Row } from 'react-bootstrap'
 
 type Props = {
   trigger: boolean
@@ -24,6 +24,9 @@ export default class BaseModule extends Component<Props, State> {
           <Row className="px-md-4">{this.props.children}</Row>
         </div>
       )
-    } else return <></>
+    }
+    else {
+      return <></>
+    }
   }
 }
