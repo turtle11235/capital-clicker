@@ -1,53 +1,28 @@
 import './App.css'
 import React, { Component } from 'react'
-import Upgrade from './lib/upgrades/Upgrade'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import BusinessModule from './components/gameModules/BusinessModule'
-import UpgradesModule from './components/gameModules/UpgradesModule'
-import Header from './components/Header'
-import { formatNumber } from './lib/utils'
-import Game from './lib/Game'
-
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
-type State = {
-  money: number
-  upgrades: Upgrade[]
-  minWage: number
-  wage: number
-  hireOneCost: number
-  numWorkers: number
-  numManagers: number
-  canHire: boolean
-  canFire: boolean
-  elapsedTime: string
-  time: string
-  day: number
-}
+import Header from './components/Header'
+import BusinessModule from './components/gameModules/BusinessModule'
+import MarketingModule from './components/gameModules/MarketingModule'
+import UpgradesModule from './components/gameModules/UpgradesModule'
 
-export default class App extends Component<{}, State> {
-  state: State
+import { AppState, defaultAppState } from './lib/AppState'
+import Game from './lib/Game'
+
+import { formatNumber } from './lib/utils'
+
+export default class App extends Component<{}, AppState> {
+  state: AppState
   game = new Game(this)
 
   constructor(props: {}) {
     super(props)
-    this.state = {
-      money: 0,
-      upgrades: [],
-      minWage: 0,
-      wage: 0,
-      hireOneCost: 0,
-      numWorkers: 0,
-      numManagers: 0,
-      canHire: false,
-      canFire: false,
-      elapsedTime: '0:0:0',
-      time: '0:0:0',
-      day: 0,
-    }
+    this.state = defaultAppState
   }
 
-  update = (newState: State) => {
+  update = (newState: AppState) => {
     this.setState({ ...this.state, ...newState })
   }
 
@@ -61,7 +36,17 @@ export default class App extends Component<{}, State> {
           time={this.state.time}
         />
         <Row md="4" className="d-flex justify-content-center">
-          <Col className="px-4"></Col>
+          <Col className="px-4">
+            <MarketingModule
+              trigger={true}
+              // logo={<></>}
+              slogan={'slogan'}
+              socialCapital={this.state.socialCapital}
+              maxBudget={this.state.maxMarketingBudget}
+              budget={this.state.marketingBudget}
+              setBudget={this.game.setMarketingBudget}
+            />
+          </Col>
           <Col className="px-4">
             <Row>
               <Button

@@ -4,12 +4,13 @@ import {
   WORKERS_PER_MANAGER,
   WORKER_SECONDS_PER_PAYDAY,
 } from '../constants'
+import Executable from '../Executable'
 import Game from '../Game'
 import { ticksToSeconds } from '../utils'
 import Employee from './Employee'
 import EmployeeFactory from './EmployeeFactory'
 
-export default class EmployeeManager {
+export default class EmployeeManager implements Executable {
   game: Game
   root: Employee
 
