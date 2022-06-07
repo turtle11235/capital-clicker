@@ -3,12 +3,12 @@ import {
   MANAGERS_PER_MANAGER,
   WORKERS_PER_MANAGER,
   WORKER_SECONDS_PER_PAYDAY,
-} from '../constants'
-import Executable from '../Executable'
-import Game from '../Game'
-import { ticksToSeconds } from '../utils'
-import Employee from './Employee'
-import EmployeeFactory from './EmployeeFactory'
+} from "../constants"
+import Executable from "../Executable"
+import Game from "../Game"
+import { ticksToSeconds } from "../utils"
+import Employee from "./Employee"
+import EmployeeFactory from "./EmployeeFactory"
 
 export default class EmployeeManager implements Executable {
   game: Game
@@ -45,7 +45,7 @@ export default class EmployeeManager implements Executable {
       for (const employee of this.root.employees) {
         employee.pay()
       }
-      console.log('PAYDAY', this.root)
+      console.log("PAYDAY", this.root)
     }
   }
 
@@ -75,7 +75,7 @@ export default class EmployeeManager implements Executable {
         this.root.hire()
       }
       else {
-        console.log('Failed to hire new employee')
+        console.log("Failed to hire new employee")
       }
 
       console.log(this.root)

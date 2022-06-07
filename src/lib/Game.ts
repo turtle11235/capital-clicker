@@ -1,10 +1,10 @@
-import App from '../App'
-import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from './constants'
-import EmployeeManager from './employees/EmployeeManager'
-import MarketingManager from './marketing/MarketingManager'
-import MoneyManager from './money/MoneyManager'
-import UpgradeManager from './upgrades/UpgradeManager'
-import { displayElapsedTime, ticksToSeconds } from './utils'
+import App from "../App"
+import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from "./constants"
+import EmployeeManager from "./employees/EmployeeManager"
+import MarketingManager from "./marketing/MarketingManager"
+import MoneyManager from "./money/MoneyManager"
+import UpgradeManager from "./upgrades/UpgradeManager"
+import { displayElapsedTime, ticksToSeconds } from "./utils"
 
 export default class Game {
   app: App

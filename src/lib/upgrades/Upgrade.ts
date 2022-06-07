@@ -26,7 +26,7 @@ export default class Upgrade {
     description,
     used = false,
     triggered = false,
-    pricetag = '',
+    pricetag = "",
     trigger = () => {
       return false
     },
@@ -51,7 +51,7 @@ export default class Upgrade {
   }
 
   static createID = () => {
-    const id = 'upgrade' + Upgrade.idCounter
+    const id = "upgrade" + Upgrade.idCounter
     Upgrade.idCounter += 1
     return id
   }

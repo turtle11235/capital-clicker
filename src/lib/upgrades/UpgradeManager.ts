@@ -2,9 +2,9 @@ import {
   MANAGER_SALARY_MULTIPLIER,
   WORKERS_PER_MANAGER,
   MANAGERS_PER_MANAGER,
-} from '../constants'
-import Game from '../Game'
-import Upgrade from './Upgrade'
+} from "../constants"
+import Game from "../Game"
+import Upgrade from "./Upgrade"
 
 export default class UpgradeManager {
   game: Game
@@ -28,8 +28,8 @@ export default class UpgradeManager {
 
   initUpgrades = () => {
     const u1 = new Upgrade({
-      title: 'Work Smarter Not Harder',
-      description: 'Begin research into improving the money-making machine',
+      title: "Work Smarter Not Harder",
+      description: "Begin research into improving the money-making machine",
       trigger: () => {
         const canBuy = this.game.totalMoney >= 0.1
         if (canBuy) {
@@ -41,9 +41,9 @@ export default class UpgradeManager {
     this._upgrades.push(u1)
 
     const u2 = new Upgrade({
-      title: 'A Slight Improvement',
-      pricetag: '($1.00)',
-      description: 'Money machine gives 5 cents per click',
+      title: "A Slight Improvement",
+      pricetag: "($1.00)",
+      description: "Money machine gives 5 cents per click",
       trigger: () => {
         return u1.used && this.game.totalMoney >= 0.15
       },
@@ -58,9 +58,9 @@ export default class UpgradeManager {
     this._upgrades.push(u2)
 
     const u3 = new Upgrade({
-      title: 'Improved Clicking Technique',
-      pricetag: '($4.00)',
-      description: 'Money machine gives 10 cents per click',
+      title: "Improved Clicking Technique",
+      pricetag: "($4.00)",
+      description: "Money machine gives 10 cents per click",
       trigger: () => {
         return u2.used && this.game.totalMoney >= 2
       },
@@ -75,9 +75,9 @@ export default class UpgradeManager {
     this._upgrades.push(u3)
 
     const u4 = new Upgrade({
-      title: 'Lubricated Button',
-      pricetag: '($10.00)',
-      description: 'Money machine gives 25 cents per click',
+      title: "Lubricated Button",
+      pricetag: "($10.00)",
+      description: "Money machine gives 25 cents per click",
       trigger: () => {
         return u3.used && this.game.totalMoney >= 10
       },
@@ -92,9 +92,9 @@ export default class UpgradeManager {
     this._upgrades.push(u4)
 
     const u5 = new Upgrade({
-      title: 'Local Business License',
-      pricetag: '($10.00)',
-      description: 'Why click when you can pay someone to click for you?',
+      title: "Local Business License",
+      pricetag: "($10.00)",
+      description: "Why click when you can pay someone to click for you?",
       trigger: () => {
         return u1.used && this.game.totalMoney >= 10
       },
@@ -109,9 +109,9 @@ export default class UpgradeManager {
     this._upgrades.push(u5)
 
     const u6 = new Upgrade({
-      title: 'Company Rollout',
-      pricetag: '($25.00)',
-      description: 'Worker machines give 5 cents per click',
+      title: "Company Rollout",
+      pricetag: "($25.00)",
+      description: "Worker machines give 5 cents per click",
       trigger: () => {
         return u5.used && u2.used && this.game.totalMoney >= 25
       },
@@ -126,9 +126,9 @@ export default class UpgradeManager {
     this._upgrades.push(u6)
 
     const u7 = new Upgrade({
-      title: 'Hardware Optimization',
-      pricetag: '($25.00)',
-      description: 'Money machine gives 50 cents per click',
+      title: "Hardware Optimization",
+      pricetag: "($25.00)",
+      description: "Money machine gives 50 cents per click",
       trigger: () => {
         return u4.used && this.game.totalMoney >= 25
       },
@@ -143,9 +143,9 @@ export default class UpgradeManager {
     this._upgrades.push(u7)
 
     const u8 = new Upgrade({
-      title: 'Company Rollout 2',
-      pricetag: '($50.00)',
-      description: 'Worker machines give 10 cents per click',
+      title: "Company Rollout 2",
+      pricetag: "($50.00)",
+      description: "Worker machines give 10 cents per click",
       trigger: () => {
         return u6.used && u3.used && this.game.totalMoney >= 50
       },
@@ -160,9 +160,9 @@ export default class UpgradeManager {
     this._upgrades.push(u8)
 
     const u9 = new Upgrade({
-      title: 'Company Rollout 3',
-      pricetag: '($100.00)',
-      description: 'Worker machines give 25 cents per click',
+      title: "Company Rollout 3",
+      pricetag: "($100.00)",
+      description: "Worker machines give 25 cents per click",
       trigger: () => {
         return u4.used && u8.used && this.game.totalMoney >= 100
       },
@@ -177,8 +177,8 @@ export default class UpgradeManager {
     this._upgrades.push(u9)
 
     const u10 = new Upgrade({
-      title: 'Beginner Business Techniques',
-      pricetag: '($100.00)',
+      title: "Beginner Business Techniques",
+      pricetag: "($100.00)",
       description: `Managers make ${MANAGER_SALARY_MULTIPLIER}x workers' wages and oversee up to ${WORKERS_PER_MANAGER} workers`,
       trigger: () => {
         return (
@@ -196,8 +196,8 @@ export default class UpgradeManager {
     this._upgrades.push(u10)
 
     const u11 = new Upgrade({
-      title: 'Middle Management',
-      pricetag: '($200.00)',
+      title: "Middle Management",
+      pricetag: "($200.00)",
       description: `Middle-managers make ${MANAGER_SALARY_MULTIPLIER}x their subordinates' wages and oversee up to ${MANAGERS_PER_MANAGER} managers`,
       trigger: () => {
         return (
@@ -215,8 +215,8 @@ export default class UpgradeManager {
     this._upgrades.push(u11)
 
     const u12 = new Upgrade({
-      title: 'Friends and Family Investment',
-      description: '$200 - This counts as your birthday present too...',
+      title: "Friends and Family Investment",
+      description: "$200 - This counts as your birthday present too...",
       trigger: () => {
         return u5.used && this.game.totalMoney >= 50
       },
@@ -227,9 +227,9 @@ export default class UpgradeManager {
     this._upgrades.push(u12)
 
     const u13 = new Upgrade({
-      title: 'Company Rollout 3',
-      pricetag: '($150)',
-      description: 'Worker machines give 50 cents per click',
+      title: "Company Rollout 3",
+      pricetag: "($150)",
+      description: "Worker machines give 50 cents per click",
       trigger: () => {
         return u7.used && u9.used && this.game.totalMoney >= 150
       },
@@ -244,9 +244,9 @@ export default class UpgradeManager {
     this._upgrades.push(u13)
 
     const u14 = new Upgrade({
-      title: 'Hardware Optimization',
-      pricetag: '($50.00)',
-      description: 'Money machine gives $1 per click',
+      title: "Hardware Optimization",
+      pricetag: "($50.00)",
+      description: "Money machine gives $1 per click",
       trigger: () => {
         return u7.used && this.game.totalMoney >= 50
       },
@@ -261,9 +261,9 @@ export default class UpgradeManager {
     this._upgrades.push(u14)
 
     const u15 = new Upgrade({
-      title: 'Company Rollout 4',
-      pricetag: '($250)',
-      description: 'Worker machines give $1 per click',
+      title: "Company Rollout 4",
+      pricetag: "($250)",
+      description: "Worker machines give $1 per click",
       trigger: () => {
         return u13.used && u14.used && this.game.totalMoney >= 250
       },
@@ -278,9 +278,9 @@ export default class UpgradeManager {
     this._upgrades.push(u15)
 
     const u16 = new Upgrade({
-      title: 'Marketing Division',
-      pricetag: '($1000)',
-      description: 'Marketing generates social capital, which can facilitate social interactions',
+      title: "Marketing Division",
+      pricetag: "($1000)",
+      description: "Marketing generates social capital, which can facilitate social interactions",
       trigger: () => {
         return this.game.middleManagersUnlocked
       },
