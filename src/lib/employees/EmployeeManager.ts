@@ -14,8 +14,8 @@ export default class EmployeeManager implements Executable {
   game: Game
   root: Employee
 
-  minWage = 7.5
-  wage = 7.5
+  minWage = 10
+  wage = 10
 
   prevPayTime = 0
 

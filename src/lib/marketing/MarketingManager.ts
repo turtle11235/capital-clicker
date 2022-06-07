@@ -16,7 +16,7 @@ export default class MarketingManager implements Executable {
   prevMarketingTime = 0
   marketingPeriod: TimeCounter
 
-  constructor(game: Game, socialCapital = 0, rate = 1, budget = 0, maxBudget = 50, slogan = '') {
+  constructor(game: Game, socialCapital = 0, rate = 1, budget = 0, maxBudget = 100, slogan = '') {
     this.game = game
     this.socialCapital = socialCapital
     this.rate = rate
