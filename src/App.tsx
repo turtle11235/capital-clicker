@@ -38,7 +38,7 @@ export default class App extends Component<{}, AppState> {
         <Row md="4" className="d-flex justify-content-center">
           <Col className="px-4">
             <MarketingModule
-              trigger={true}
+              trigger={this.game.marketingUnlocked}
               // logo={<></>}
               slogan={'slogan'}
               socialCapital={this.state.socialCapital}

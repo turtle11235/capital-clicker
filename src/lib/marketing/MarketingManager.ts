@@ -32,6 +32,7 @@ export default class MarketingManager implements Executable {
       if (this.game.money >= this.budget) {
         this.game.spendMoney(this.budget)
         this.socialCapital += this.rate * (this.budget / 100)
+        console.log(this.socialCapital)
       }
     }
   }

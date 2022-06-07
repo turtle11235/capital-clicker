@@ -135,6 +135,14 @@ export default class Game {
     return this.employeeManager.businessUnlocked
   }
 
+  get managersUnlocked() {
+    return this.employeeManager.managersUnlocked
+  }
+
+  get middleManagersUnlocked() {
+    return this.employeeManager.middleManagersUnlocked
+  }
+
   get numWorkers() {
     return this.employeeManager.numWorkers
   }
