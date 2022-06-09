@@ -7,6 +7,7 @@ type Props = {
   trigger?: () => boolean
   effect?: () => void
   cost?: () => boolean
+  maxUses?: number
 }
 
 export default class Upgrade {
@@ -17,6 +18,8 @@ export default class Upgrade {
   readonly description: string
   used: boolean
   triggered: boolean
+  count = 0
+  maxUses: number
   _trigger: () => boolean
   _effect: () => void
   cost: () => boolean
@@ -34,6 +37,7 @@ export default class Upgrade {
     cost = () => {
       return true
     },
+    maxUses = 1
   }: Props) {
     this.id = Upgrade.createID()
 
@@ -48,6 +52,7 @@ export default class Upgrade {
     this._effect = effect
 
     this.cost = cost
+    this.maxUses = maxUses
   }
 
   static createID = () => {
@@ -65,6 +70,8 @@ export default class Upgrade {
 
   effect = () => {
     this._effect()
-    this.used = true
+    if (++this.count >= this.maxUses) {
+      this.used = true
+    }
   }
 }

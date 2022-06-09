@@ -99,6 +99,10 @@ export default class Game {
     this.employeeManager.unlockBusiness()
   }
 
+  upgradeManagers = () => {
+    this.employeeManager.upgradeManagers()
+  }
+
   unlockManagers = () => {
     this.employeeManager.unlockManagers()
   }

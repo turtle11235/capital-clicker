@@ -1,7 +1,6 @@
 import {
   HIRING_BONUS,
   MANAGERS_PER_MANAGER,
-  WORKERS_PER_MANAGER,
   WORKER_SECONDS_PER_PAYDAY,
 } from "../constants"
 import Executable from "../Executable"
@@ -18,6 +17,7 @@ export default class EmployeeManager implements Executable {
   wage = 10
 
   prevPayTime = 0
+  maxManagerLevel = 1
 
   businessUnlocked = false
   managersUnlocked = false
@@ -97,6 +97,10 @@ export default class EmployeeManager implements Executable {
     this.businessUnlocked = true
   }
 
+  upgradeManagers() {
+    this.maxManagerLevel++
+  }
+
   unlockManagers() {
     this.managersUnlocked = true
   }
@@ -151,11 +155,7 @@ export default class EmployeeManager implements Executable {
       return true
     }
     else if (this.game.money >= this.hireOneCost) {
-      return (
-        this.middleManagersUnlocked
-        || (this.managersUnlocked && this.numManagers < MANAGERS_PER_MANAGER)
-        || (this.businessUnlocked && this.numWorkers < WORKERS_PER_MANAGER)
-      )
+      return this.root.level < this.maxManagerLevel
     }
     else {
       return false
