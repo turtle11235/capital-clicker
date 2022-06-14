@@ -124,7 +124,11 @@ export default class Game {
   }
 
   setMarketingBudget = (budget: number) => {
-    this.marketingManager.budget = budget
+    this.marketingManager.setBudget(budget)
+  }
+
+  setMaxMarketingBudget = (budget: number) => {
+    this.marketingManager.setMaxBudget(budget)
   }
 
   get totalMoney() {
@@ -145,6 +149,10 @@ export default class Game {
 
   get middleManagersUnlocked() {
     return this.employeeManager.middleManagersUnlocked
+  }
+
+  get maxManagerLevel() {
+    return this.employeeManager.maxManagerLevel
   }
 
   get numWorkers() {

@@ -288,7 +288,7 @@ export default class UpgradeManager {
       pricetag: "($1000)",
       description: "Marketing generates social capital, which can facilitate social interactions",
       trigger: () => {
-        return this.game.middleManagersUnlocked
+        return this.game.maxManagerLevel >= 3
       },
       effect: () => {
         this.game.spendMoney(1000)
@@ -299,5 +299,90 @@ export default class UpgradeManager {
       },
     })
     this._upgrades.push(u15)
+
+    const u16 = new Upgrade({
+      title: "Telemarketing",
+      pricetag: "($2000)",
+      description: "Marketing budget cap raised to $200 per day",
+      trigger: () => {
+        return this.game.maxManagerLevel >= 4
+      },
+      effect: () => {
+        this.game.spendMoney(2000)
+        this.game.setMaxMarketingBudget(200)
+      },
+      cost: () => {
+        return this.game.money >= 2000
+      },
+    })
+    this._upgrades.push(u16)
+
+    const u17 = new Upgrade({
+      title: "Social Media Campaign",
+      pricetag: "($5000)",
+      description: "Marketing budget cap raised to $500 per day",
+      trigger: () => {
+        return this.game.maxManagerLevel >= 5
+      },
+      effect: () => {
+        this.game.spendMoney(5000)
+        this.game.setMaxMarketingBudget(500)
+      },
+      cost: () => {
+        return this.game.money >= 5000
+      },
+    })
+    this._upgrades.push(u17)
+
+    const u18 = new Upgrade({
+      title: "Targeted Ads",
+      pricetag: "($10000)",
+      description: "Marketing budget cap raised to $1000 per day",
+      trigger: () => {
+        return this.game.maxManagerLevel >= 6
+      },
+      effect: () => {
+        this.game.spendMoney(10000)
+        this.game.setMaxMarketingBudget(1000)
+      },
+      cost: () => {
+        return this.game.money >= 10000
+      },
+    })
+    this._upgrades.push(u18)
+
+    const u19 = new Upgrade({
+      title: "Behavioural Tracking",
+      pricetag: "($20000)",
+      description: "Marketing budget cap raised to $2000 per day",
+      trigger: () => {
+        return this.game.maxManagerLevel >= 7
+      },
+      effect: () => {
+        this.game.spendMoney(20000)
+        this.game.setMaxMarketingBudget(2000)
+      },
+      cost: () => {
+        return this.game.money >= 20000
+      },
+    })
+    this._upgrades.push(u19)
+
+    const u20 = new Upgrade({
+      title: "Telemarketing",
+      pricetag: "($100000)",
+      description: "Marketing budget has no limits",
+      trigger: () => {
+        return this.game.maxManagerLevel >= 8
+      },
+      effect: () => {
+        this.game.spendMoney(100000)
+        this.game.setMaxMarketingBudget(Number.POSITIVE_INFINITY)
+      },
+      cost: () => {
+        return this.game.money >= 100000
+      },
+    })
+    this._upgrades.push(u20)
   }
 }
