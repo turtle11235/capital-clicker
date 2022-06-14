@@ -1,5 +1,5 @@
-import { FIRING_MULTIPLIER } from '../constants'
-import Employee from './Employee'
+import { FIRING_MULTIPLIER } from "../constants"
+import Employee from "./Employee"
 
 export default abstract class Manager extends Employee {
   work = () => {
@@ -20,7 +20,7 @@ export default abstract class Manager extends Employee {
         return this.employees[i].fire()
       }
     }
-    throw new Error('Unable to fire, employees is empty')
+    throw new Error("Unable to fire, employees is empty")
   }
 
   get canFire(): boolean {

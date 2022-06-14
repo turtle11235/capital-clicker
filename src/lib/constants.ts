@@ -8,6 +8,7 @@ export const WORKERS_PER_MANAGER = 5
 export const MANAGERS_PER_MANAGER = 5
 export const MANAGER_SALARY_MULTIPLIER = 2
 export const HIRING_BONUS = 3
+export const TRAINING_OVERHEAD = 1.5
 export const FIRING_MULTIPLIER = 3
 
 export const MARKETING_INTERVAL = (1 * 24 * 60 * 60) / IRL_TO_INGAME_TIME_MULTIPLIER

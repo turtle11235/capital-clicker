@@ -3,11 +3,11 @@ import {
   MANAGERS_PER_MANAGER,
   MANAGER_SALARY_MULTIPLIER,
   WORKERS_PER_MANAGER,
-} from '../constants'
-import { sum } from '../utils'
-import Employee from './Employee'
-import EmployeeFactory from './EmployeeFactory'
-import Manager from './Manager'
+} from "../constants"
+import { sum } from "../utils"
+import Employee from "./Employee"
+import EmployeeFactory from "./EmployeeFactory"
+import Manager from "./Manager"
 
 export default class MiddleManager extends Manager {
   hire(): Employee {
@@ -24,12 +24,11 @@ export default class MiddleManager extends Manager {
       }
       const employee = EmployeeFactory.createEmployee(employeeProps)
       this.employees.push(employee)
-      this.spendMoney(employee, employee.wage * HIRING_BONUS)
       employee.hire()
       return employee
     }
     else {
-      throw new Error('out of bounds error, manager has too many employees')
+      throw new Error("out of bounds error, manager has too many employees")
     }
   }
 
@@ -38,7 +37,7 @@ export default class MiddleManager extends Manager {
       return this.employees.some((employee) => employee.canHire)
     }
     else {
-      return this.getMoney() >= this.hireOneCost
+      return this.getMoney() >= this.hireOneWorkerCost
     }
   }
 
@@ -60,10 +59,10 @@ export default class MiddleManager extends Manager {
     )
   }
 
-  get hireOneCost() {
+  get hireOneWorkerCost() {
     const hirable = this.employees.filter((employee) => employee.canHire)
     if (hirable.length > 0) {
-      const hiringCosts = hirable.map((employee) => employee.hireOneCost)
+      const hiringCosts = hirable.map((employee) => employee.hireOneWorkerCost)
       return Math.min(...hiringCosts)
     }
     else {
@@ -73,26 +72,27 @@ export default class MiddleManager extends Manager {
         b = base wage
         m = manager salary multiplier
         h = hiring bonus
+        t = training overhead
         l = level
 
-        hiring cost = (b * (m^0) * h) + (b * (m^1) * h) + ... + (b * (m^l) * h)
+        hiring cost = (b * (m^0) * h * t) + (b * (m^1) * h * t) + ... + (b * (m^l) * h * T)
       */
       let summedCosts = 0
       for (let i = 0; i < this.level; i++) {
         const salaryMultiplier = Math.pow(MANAGER_SALARY_MULTIPLIER, i)
-        const cost = this.getBaseWage() * salaryMultiplier * HIRING_BONUS
+        const cost = this.getBaseWage() * salaryMultiplier * this.getHiringMultiplier()
         summedCosts += cost
       }
       return summedCosts
     }
   }
 
-  get hireAllCost() {
+  get hireAllWorkersCost() {
     let summedTotalCosts = 0
     let currLevelEmployeeCount = MANAGERS_PER_MANAGER
     for (let currLevel = this.level - 1; currLevel >= 0; currLevel--) {
       const salaryMultiplier = Math.pow(MANAGER_SALARY_MULTIPLIER, currLevel)
-      const costOfOne = this.getBaseWage() * salaryMultiplier * HIRING_BONUS
+      const costOfOne = this.getBaseWage() * salaryMultiplier * this.getHiringMultiplier()
       const costOfLevel = costOfOne * currLevelEmployeeCount
       summedTotalCosts += costOfLevel
       if (currLevel > 1) {

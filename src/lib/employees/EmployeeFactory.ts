@@ -1,7 +1,7 @@
-import Employee from './Employee'
-import MiddleManager from './MiddleManager'
-import LowerManager from './LowerManager'
-import Worker from './Worker'
+import Employee from "./Employee"
+import MiddleManager from "./MiddleManager"
+import LowerManager from "./LowerManager"
+import Worker from "./Worker"
 
 export type EmployeeProps = {
   level: number
@@ -10,6 +10,7 @@ export type EmployeeProps = {
   spendCallBack: (employee: Employee, amount: number) => void
   workCallback: () => void
   counterCallback: () => number
+  hireMultiplierCallback: () => number
   boss: Employee | null
   employees: Employee[]
 }

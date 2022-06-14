@@ -1,6 +1,7 @@
 import {
   HIRING_BONUS,
   MANAGERS_PER_MANAGER,
+  TRAINING_OVERHEAD,
   WORKER_SECONDS_PER_PAYDAY,
 } from "../constants"
 import Executable from "../Executable"
@@ -34,6 +35,9 @@ export default class EmployeeManager implements Executable {
         this.game.workerClick()
       },
       counterCallback: () => game.counter,
+      hireMultiplierCallback: () => {
+        return HIRING_BONUS * Math.pow(TRAINING_OVERHEAD, this.root ? this.root.level - 1 : 0)
+      },
       boss: null,
       employees: [],
     })
@@ -68,7 +72,7 @@ export default class EmployeeManager implements Executable {
         }
         this.root = EmployeeFactory.createEmployee(props)
         oldRoot.boss = this.root
-        this.spend(oldRoot, oldRoot.wage * HIRING_BONUS)
+        this.spend(oldRoot, oldRoot.hireThisCost)
       }
 
       if (this.root.canHire) {
@@ -88,7 +92,8 @@ export default class EmployeeManager implements Executable {
   }
 
   spend = (employee: Employee, amount: number) => {
-    if (this.root !== employee) {
+    console.log(this.root, employee)
+    if (this.root && this.root !== employee) {
       this.game.spendMoney(amount)
     }
   }
@@ -122,7 +127,7 @@ export default class EmployeeManager implements Executable {
       if the root is full, the cost will include the cost of hiring 2 managers
       at the level of the root (including hiring bonus)
     */
-    const cost = this.root.hireOneCost
+    const cost = this.root.hireOneWorkerCost
     if (this.root.isFull && !this.root.canHire) {
       return cost + this.root.wage * HIRING_BONUS * 2
     }
@@ -137,7 +142,7 @@ export default class EmployeeManager implements Executable {
       at the level of the root and all of its sub-managers (minus the one that
       already exists)
     */
-    const cost = this.root.hireAllCost
+    const cost = this.root.hireAllWorkersCost
     if (this.root.isFull) {
       const newBossCost = this.root.wage * HIRING_BONUS
       const subManagersCost

@@ -1,8 +1,8 @@
-import { HIRING_BONUS, WORKERS_PER_MANAGER } from '../constants'
-import { sum } from '../utils'
-import Employee from './Employee'
-import EmployeeFactory from './EmployeeFactory'
-import Manager from './Manager'
+import { WORKERS_PER_MANAGER } from "../constants"
+import { sum } from "../utils"
+import Employee from "./Employee"
+import EmployeeFactory from "./EmployeeFactory"
+import Manager from "./Manager"
 
 export default class LowerManager extends Manager {
   hire(): Employee {
@@ -12,12 +12,11 @@ export default class LowerManager extends Manager {
     }
     const employee = EmployeeFactory.createEmployee(employeeProps)
     this.employees.push(employee)
-    this.spendMoney(employee, employee.wage * HIRING_BONUS)
     return employee
   }
 
   get canHire() {
-    const hasFunds = this.getMoney() >= this.hireOneCost
+    const hasFunds = this.getMoney() >= this.hireOneWorkerCost
     return !this.isFull && hasFunds
   }
 
@@ -39,11 +38,11 @@ export default class LowerManager extends Manager {
     )
   }
 
-  get hireOneCost(): number {
-    return this.getBaseWage() * HIRING_BONUS
+  get hireOneWorkerCost(): number {
+    return this.getBaseWage() * this.getHiringMultiplier()
   }
 
-  get hireAllCost(): number {
-    return this.hireOneCost * (WORKERS_PER_MANAGER - this.employees.length)
+  get hireAllWorkersCost(): number {
+    return this.hireOneWorkerCost * (WORKERS_PER_MANAGER - this.employees.length)
   }
 }
