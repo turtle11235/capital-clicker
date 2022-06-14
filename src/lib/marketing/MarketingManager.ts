@@ -1,7 +1,7 @@
-import Game from '../Game'
-import Executable from '../Executable'
-import TimeCounter from '../TimeCounter'
-import { MARKETING_INTERVAL } from '../constants'
+import Game from "../Game"
+import Executable from "../Executable"
+import TimeCounter from "../TimeCounter"
+import { MARKETING_INTERVAL } from "../constants"
 
 
 export default class MarketingManager implements Executable {
@@ -16,7 +16,7 @@ export default class MarketingManager implements Executable {
   prevMarketingTime = 0
   marketingPeriod: TimeCounter
 
-  constructor(game: Game, socialCapital = 0, rate = 1, budget = 0, maxBudget = 100, slogan = '') {
+  constructor(game: Game, socialCapital = 0, rate = 1, budget = 0, maxBudget = 100, slogan = "") {
     this.game = game
     this.socialCapital = socialCapital
     this.rate = rate
@@ -39,5 +39,15 @@ export default class MarketingManager implements Executable {
 
   getSocialCapital = () => {
     return Math.floor(this.socialCapital)
+  }
+
+  setBudget = (budget: number) => {
+    if (budget <= this.maxBudget) {
+      this.budget = budget
+    }
+  }
+
+  setMaxBudget = (budget: number) => {
+    this.maxBudget = Math.max(this.maxBudget, budget)
   }
 }
