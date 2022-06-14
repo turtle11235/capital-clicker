@@ -371,13 +371,13 @@ export default class UpgradeManager {
     const u20 = new Upgrade({
       title: "Telemarketing",
       pricetag: "($100000)",
-      description: "Marketing budget has no limits",
+      description: "Marketing budget cap raised to $10000 per day",
       trigger: () => {
         return this.game.maxManagerLevel >= 8
       },
       effect: () => {
         this.game.spendMoney(100000)
-        this.game.setMaxMarketingBudget(Number.POSITIVE_INFINITY)
+        this.game.setMaxMarketingBudget(10000)
       },
       cost: () => {
         return this.game.money >= 100000
