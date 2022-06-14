@@ -20,8 +20,6 @@
     "react",
     "@typescript-eslint"
   ],
-  "rules": {
-    "array-element-newline": ["error", { "multiline": true }],
     "arrow-parens": ["error"],
     "arrow-spacing": ["error"],
     "block-spacing": ["error"],

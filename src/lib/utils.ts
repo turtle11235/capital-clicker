@@ -48,3 +48,7 @@ export function sum(...numbers: number[] | number[][]): number {
     return numbers[0].reduce((a, b) => a + b, 0)
   }
 }
+
+export function randomValue(list: string[]): string {
+  return list[Math.floor(Math.random() * list.length)]
+}

@@ -4,7 +4,7 @@ import {
   MANAGER_SALARY_MULTIPLIER,
   WORKERS_PER_MANAGER,
 } from "../constants"
-import { sum } from "../utils"
+import { randomValue, sum } from "../utils"
 import Employee from "./Employee"
 import EmployeeFactory from "./EmployeeFactory"
 import Manager from "./Manager"
@@ -112,10 +112,6 @@ export default class MiddleManager extends Manager {
   }
 
   get title(): string {
-    return this.randomValue(this.title1) + " " + this.randomValue(this.title2) + " of " + this.randomValue(this.title3)
-  }
-
-  randomValue(list: string[]): string {
-    return list[Math.floor(Math.random() * list.length)]
+    return randomValue(this.title1) + " " + randomValue(this.title2) + " of " + randomValue(this.title3)
   }
 }
