@@ -1,10 +1,10 @@
-import { FIRING_MULTIPLIER, WORKER_CLICKS_PER_SECOND } from '../constants'
-import { ticksToSeconds } from '../utils'
-import Employee from './Employee'
+import { FIRING_MULTIPLIER, WORKER_CLICKS_PER_SECOND } from "../constants"
+import { ticksToSeconds } from "../utils"
+import Employee from "./Employee"
 
 export default class Worker extends Employee {
-  readonly hireOneCost = NaN
-  readonly hireAllCost = NaN
+  readonly hireOneWorkerCost = NaN
+  readonly hireAllWorkersCost = NaN
   readonly numWorkers = 1
   readonly numManagers = 0
 
@@ -33,7 +33,7 @@ export default class Worker extends Employee {
 
   fire(employee?: Employee): Employee {
     if (employee) {
-      throw new Error('Worker cannot fire specific employees')
+      throw new Error("Worker cannot fire specific employees")
     }
 
     return this.boss!.fire(this)

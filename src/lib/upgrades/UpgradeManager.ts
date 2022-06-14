@@ -4,6 +4,7 @@ import {
   MANAGERS_PER_MANAGER,
 } from "../constants"
 import Game from "../Game"
+import { formatNumber } from "../utils"
 import Upgrade from "./Upgrade"
 
 export default class UpgradeManager {
@@ -187,7 +188,31 @@ export default class UpgradeManager {
       },
       effect: () => {
         this.game.spendMoney(100)
-        this.game.unlockManagers()
+        this.game.upgradeManagers()
+        let price = 400
+        let level = 1
+        console.log("Starting manager upgrade chain")
+        const createNextUpgrade = () => {
+          console.log("creating new upgrade")
+          const currPrice = price
+          this._upgrades.push(new Upgrade({
+            title: "Middle Management " + level,
+            pricetag: `($${formatNumber(currPrice)})`,
+            description: `Middle-managers make ${MANAGER_SALARY_MULTIPLIER}x their subordinates' wages and oversee up to ${MANAGERS_PER_MANAGER} managers`,
+            trigger: () => {
+              return true
+            },
+            effect: () => {
+              this.game.spendMoney(currPrice)
+              this.game.upgradeManagers()
+              createNextUpgrade()
+            },
+            cost: () => this.game.money >= currPrice
+          }))
+          price *= 2
+          level++
+        }
+        createNextUpgrade()
       },
       cost: () => {
         return this.game.money >= 100
@@ -195,24 +220,24 @@ export default class UpgradeManager {
     })
     this._upgrades.push(u10)
 
-    const u11 = new Upgrade({
-      title: "Middle Management",
-      pricetag: "($200.00)",
-      description: `Middle-managers make ${MANAGER_SALARY_MULTIPLIER}x their subordinates' wages and oversee up to ${MANAGERS_PER_MANAGER} managers`,
-      trigger: () => {
-        return (
-          u10.used && this.game.numWorkers >= WORKERS_PER_MANAGER * MANAGERS_PER_MANAGER && this.game.totalMoney >= 200
-        )
-      },
-      effect: () => {
-        this.game.spendMoney(200)
-        this.game.unlockMiddleManagers()
-      },
-      cost: () => {
-        return this.game.money >= 200
-      },
-    })
-    this._upgrades.push(u11)
+    // const u11 = new Upgrade({
+    //   title: "Middle Management 1",
+    //   pricetag: "($500.00)",
+    //   description: `Middle-managers make ${MANAGER_SALARY_MULTIPLIER}x their subordinates' wages and oversee up to ${MANAGERS_PER_MANAGER} managers`,
+    //   trigger: () => {
+    //     return (
+    //       u10.used && this.game.numWorkers >= WORKERS_PER_MANAGER * MANAGERS_PER_MANAGER && this.game.totalMoney >= 500
+    //     )
+    //   },
+    //   effect: () => {
+    //     this.game.spendMoney(500)
+    //     this.game.upgradeManagers()
+    //   },
+    //   cost: () => {
+    //     return this.game.money >= 500
+    //   },
+    // })
+    // this._upgrades.push(u11)
 
     const u12 = new Upgrade({
       title: "Friends and Family Investment",
