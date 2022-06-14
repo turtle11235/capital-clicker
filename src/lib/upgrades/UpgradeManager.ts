@@ -271,7 +271,7 @@ export default class UpgradeManager {
       pricetag: "($250)",
       description: "Worker machines give $1 per click",
       trigger: () => {
-        return u13.used && u13.used && this.game.totalMoney >= 250
+        return u12.used && u13.used && this.game.totalMoney >= 250
       },
       effect: () => {
         this.game.spendMoney(250)
