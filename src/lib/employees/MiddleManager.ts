@@ -10,6 +10,10 @@ import EmployeeFactory from "./EmployeeFactory"
 import Manager from "./Manager"
 
 export default class MiddleManager extends Manager {
+  readonly title1 = ["Head", "Vice", "Assistant", "Executive"]
+  readonly title2 = ["Supervisor", "President", "Coordinator"]
+  readonly title3 = ["Creativity", "Products", "Vision"]
+
   hire(): Employee {
     for (const employee of this.employees) {
       if (employee.canHire) {
@@ -105,5 +109,13 @@ export default class MiddleManager extends Manager {
 
     const currentCost = (this.totalWages + this.wage) * HIRING_BONUS
     return summedTotalCosts - currentCost
+  }
+
+  get name(): string {
+    return this.randomValue(this.title1) + " " + this.randomValue(this.title2) + " of " + this.randomValue(this.title3)
+  }
+
+  randomValue(list: string[]): string {
+    return list[Math.floor(Math.random() * list.length)]
   }
 }

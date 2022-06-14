@@ -1,6 +1,7 @@
 import { FIRING_MULTIPLIER, WORKER_CLICKS_PER_SECOND } from "../constants"
 import { ticksToSeconds } from "../utils"
 import Employee from "./Employee"
+import { EmployeeProps } from "./EmployeeFactory"
 
 export default class Worker extends Employee {
   readonly hireOneWorkerCost = NaN
@@ -8,7 +9,16 @@ export default class Worker extends Employee {
   readonly numWorkers = 1
   readonly numManagers = 0
 
+  static idCounter = 1
+  id: number
+
   prevWorkTime = 0
+
+  constructor(props: EmployeeProps) {
+    super(props)
+    this.id = Worker.idCounter
+    Worker.idCounter++
+  }
 
   workPeriodHasElapsed = () => {
     const elapsedTimeInSeconds = ticksToSeconds(this.getCounter() - this.prevWorkTime)
@@ -53,5 +63,9 @@ export default class Worker extends Employee {
 
   get isFull() {
     return true
+  }
+
+  get name(): string {
+    return "Worker " + this.id
   }
 }

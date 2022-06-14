@@ -1,10 +1,19 @@
 import { WORKERS_PER_MANAGER } from "../constants"
 import { sum } from "../utils"
 import Employee from "./Employee"
-import EmployeeFactory from "./EmployeeFactory"
+import EmployeeFactory, { EmployeeProps } from "./EmployeeFactory"
 import Manager from "./Manager"
 
 export default class LowerManager extends Manager {
+  static idCounter = 1
+  id: number
+
+  constructor(props: EmployeeProps) {
+    super(props)
+    this.id = LowerManager.idCounter
+    LowerManager.idCounter++
+  }
+
   hire(): Employee {
     const employeeProps = {
       ...this.props,
@@ -44,5 +53,9 @@ export default class LowerManager extends Manager {
 
   get hireAllWorkersCost(): number {
     return this.hireOneWorkerCost * (WORKERS_PER_MANAGER - this.employees.length)
+  }
+
+  get name(): string {
+    return "Supervisor " + this.id
   }
 }
