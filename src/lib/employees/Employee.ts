@@ -14,7 +14,7 @@ export default abstract class Employee {
   abstract get numWorkers(): number
   abstract get numManagers(): number
   abstract get isFull(): boolean
-  abstract get name(): string
+  abstract get title(): string
 
   level: number
   getMoney: () => number

@@ -111,7 +111,7 @@ export default class MiddleManager extends Manager {
     return summedTotalCosts - currentCost
   }
 
-  get name(): string {
+  get title(): string {
     return this.randomValue(this.title1) + " " + this.randomValue(this.title2) + " of " + this.randomValue(this.title3)
   }
 

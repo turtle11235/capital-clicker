@@ -55,7 +55,7 @@ export default class LowerManager extends Manager {
     return this.hireOneWorkerCost * (WORKERS_PER_MANAGER - this.employees.length)
   }
 
-  get name(): string {
+  get title(): string {
     return "Supervisor " + this.id
   }
 }

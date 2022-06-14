@@ -65,7 +65,7 @@ export default class Worker extends Employee {
     return true
   }
 
-  get name(): string {
+  get title(): string {
     return "Worker " + this.id
   }
 }
