@@ -45,10 +45,10 @@ export default class MoneyManager {
   }
 
   setUserClickVal = (amount: number) => {
-    this.userClickVal = amount
+    this.userClickVal = Math.max(this.userClickVal, amount)
   }
 
   setWorkerClickVal = (amount: number) => {
-    this.workerClickVal = amount
+    this.workerClickVal = Math.max(this.workerClickVal, amount)
   }
 }
