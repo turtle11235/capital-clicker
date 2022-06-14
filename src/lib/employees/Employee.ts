@@ -1,10 +1,12 @@
 import { MANAGER_SALARY_MULTIPLIER } from "../constants"
 import { EmployeeProps } from "./EmployeeFactory"
+import Name from "./Name"
 
 export default abstract class Employee {
   props: EmployeeProps
   boss: Employee | null
   employees: Employee[]
+  name: string
 
   abstract get hireOneWorkerCost(): number
   abstract get hireAllWorkersCost(): number
@@ -14,6 +16,7 @@ export default abstract class Employee {
   abstract get numWorkers(): number
   abstract get numManagers(): number
   abstract get isFull(): boolean
+  abstract get title(): string
 
   level: number
   getMoney: () => number
@@ -34,6 +37,7 @@ export default abstract class Employee {
     this.getHiringMultiplier = props.hireMultiplierCallback
     this.boss = props.boss
     this.employees = props.employees
+    this.name = Name.getName()
 
     this.spendMoney(this, this.hireThisCost)
   }

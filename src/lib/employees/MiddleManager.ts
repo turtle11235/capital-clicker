@@ -4,12 +4,16 @@ import {
   MANAGER_SALARY_MULTIPLIER,
   WORKERS_PER_MANAGER,
 } from "../constants"
-import { sum } from "../utils"
+import { randomValue, sum } from "../utils"
 import Employee from "./Employee"
 import EmployeeFactory from "./EmployeeFactory"
 import Manager from "./Manager"
 
 export default class MiddleManager extends Manager {
+  readonly title1 = ["Head", "Vice", "Assistant", "Executive"]
+  readonly title2 = ["Supervisor", "President", "Coordinator"]
+  readonly title3 = ["Creativity", "Products", "Vision"]
+
   hire(): Employee {
     for (const employee of this.employees) {
       if (employee.canHire) {
@@ -105,5 +109,9 @@ export default class MiddleManager extends Manager {
 
     const currentCost = (this.totalWages + this.wage) * HIRING_BONUS
     return summedTotalCosts - currentCost
+  }
+
+  get title(): string {
+    return randomValue(this.title1) + " " + randomValue(this.title2) + " of " + randomValue(this.title3)
   }
 }
