@@ -1,17 +1,17 @@
-import './App.css'
-import React, { Component } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import "./App.css"
+import React, { Component } from "react"
+import { Container, Row, Col, Button } from "react-bootstrap"
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
-import Header from './components/Header'
-import BusinessModule from './components/gameModules/BusinessModule'
-import MarketingModule from './components/gameModules/MarketingModule'
-import UpgradesModule from './components/gameModules/UpgradesModule'
+import Header from "./components/Header"
+import BusinessModule from "./components/gameModules/BusinessModule"
+import MarketingModule from "./components/gameModules/MarketingModule"
+import UpgradesModule from "./components/gameModules/UpgradesModule"
 
-import { AppState, defaultAppState } from './lib/AppState'
-import Game from './lib/Game'
+import { AppState, defaultAppState } from "./lib/AppState"
+import Game from "./lib/Game"
 
-import { formatNumber } from './lib/utils'
+import { formatNumber } from "./lib/utils"
 
 export default class App extends Component<{}, AppState> {
   state: AppState
@@ -40,7 +40,7 @@ export default class App extends Component<{}, AppState> {
             <MarketingModule
               trigger={this.game.marketingUnlocked}
               // logo={<></>}
-              slogan={'slogan'}
+              slogan={"slogan"}
               socialCapital={this.state.socialCapital}
               maxBudget={this.state.maxMarketingBudget}
               budget={this.state.marketingBudget}
@@ -52,20 +52,20 @@ export default class App extends Component<{}, AppState> {
               <Button
                 className="py-4 w-50 m-auto"
                 variant="secondary"
-                onClick={() => {
+                onClick={(e) => {
                   this.game.userClick()
-                  // const button = e.target as HTMLButtonElement
-                  // button.blur()
+                  const button = e.target as HTMLButtonElement
+                  button.blur()
                 }}
                 onMouseDown={(e) => {
                   const button = e.target as HTMLButtonElement
-                  button.classList.remove('btn-secondary')
-                  button.classList.add('btn-danger')
+                  button.classList.remove("btn-secondary")
+                  button.classList.add("btn-danger")
                 }}
                 onMouseUp={(e) => {
                   const button = e.target as HTMLButtonElement
-                  button.classList.remove('btn-danger')
-                  button.classList.add('btn-secondary')
+                  button.classList.remove("btn-danger")
+                  button.classList.add("btn-secondary")
                 }}
               >
                 Make Money
