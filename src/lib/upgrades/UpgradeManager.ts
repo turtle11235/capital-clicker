@@ -220,26 +220,7 @@ export default class UpgradeManager {
     })
     this._upgrades.push(u10)
 
-    // const u11 = new Upgrade({
-    //   title: "Middle Management 1",
-    //   pricetag: "($500.00)",
-    //   description: `Middle-managers make ${MANAGER_SALARY_MULTIPLIER}x their subordinates' wages and oversee up to ${MANAGERS_PER_MANAGER} managers`,
-    //   trigger: () => {
-    //     return (
-    //       u10.used && this.game.numWorkers >= WORKERS_PER_MANAGER * MANAGERS_PER_MANAGER && this.game.totalMoney >= 500
-    //     )
-    //   },
-    //   effect: () => {
-    //     this.game.spendMoney(500)
-    //     this.game.upgradeManagers()
-    //   },
-    //   cost: () => {
-    //     return this.game.money >= 500
-    //   },
-    // })
-    // this._upgrades.push(u11)
-
-    const u12 = new Upgrade({
+    const u11 = new Upgrade({
       title: "Friends and Family Investment",
       description: "$200 - This counts as your birthday present too...",
       trigger: () => {
@@ -249,9 +230,9 @@ export default class UpgradeManager {
         this.game.receiveMoney(200)
       },
     })
-    this._upgrades.push(u12)
+    this._upgrades.push(u11)
 
-    const u13 = new Upgrade({
+    const u12 = new Upgrade({
       title: "Company Rollout 3",
       pricetag: "($150)",
       description: "Worker machines give 50 cents per click",
@@ -266,9 +247,9 @@ export default class UpgradeManager {
         return this.game.money >= 150
       },
     })
-    this._upgrades.push(u13)
+    this._upgrades.push(u12)
 
-    const u14 = new Upgrade({
+    const u13 = new Upgrade({
       title: "Hardware Optimization",
       pricetag: "($50.00)",
       description: "Money machine gives $1 per click",
@@ -283,14 +264,14 @@ export default class UpgradeManager {
         return this.game.money >= 50
       },
     })
-    this._upgrades.push(u14)
+    this._upgrades.push(u13)
 
-    const u15 = new Upgrade({
+    const u14 = new Upgrade({
       title: "Company Rollout 4",
       pricetag: "($250)",
       description: "Worker machines give $1 per click",
       trigger: () => {
-        return u13.used && u14.used && this.game.totalMoney >= 250
+        return u13.used && u13.used && this.game.totalMoney >= 250
       },
       effect: () => {
         this.game.spendMoney(250)
@@ -300,9 +281,9 @@ export default class UpgradeManager {
         return this.game.money >= 250
       },
     })
-    this._upgrades.push(u15)
+    this._upgrades.push(u14)
 
-    const u16 = new Upgrade({
+    const u15 = new Upgrade({
       title: "Marketing Division",
       pricetag: "($1000)",
       description: "Marketing generates social capital, which can facilitate social interactions",
@@ -317,6 +298,6 @@ export default class UpgradeManager {
         return this.game.money >= 1000
       },
     })
-    this._upgrades.push(u16)
+    this._upgrades.push(u15)
   }
 }
