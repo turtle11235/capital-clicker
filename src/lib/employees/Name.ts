@@ -14,12 +14,12 @@ export default class Name {
     "Brooklyn", "Nathan", "Elena", "Caleb", "Aubrey", "Ryan", "Claire", "Adrian", "Ivy", "Miles", "Kinsley", "Eli",
     "Audrey", "Nolan", "Maya", "Christian", "Genesis", "Aaron", "Skylar", "Cameron", "Bella", "Ezekiel", "Aaliyah",
     "Colton", "Madelyn", "Luca", "Savannah", "Landon", "Anna", "Hunter", "Delilah", "Jonathan", "Serenity", "Santiago",
-    "Caroline", "Axel", "Kennedy", "Easton", "Valentina", "Cooper", "Ruby", "Jeremiah", "Sophie", "Angel", "Alice", "Roman",
+    "Caroline", "Axel", "Kennedy", "Emerson", "Valentina", "Cooper", "Ruby", "Jeremiah", "Sophie", "Angel", "Alice", "Roman",
     "Gabriella", "Connor", "Sadie", "Jameson", "Ariana", "Robert", "Allison", "Greyson", "Hailey", "Jordan", "Autumn",
     "Ian", "Nevaeh", "Carson", "Natalia", "Jaxson", "Quinn", "Leonardo", "Josephine", "Nicholas", "Sarah", "Dominic",
     "Cora", "Austin", "Emery", "Everett", "Samantha", "Brooks", "Piper", "Xavier", "Leilani", "Kai", "Eva", "Jose",
     "Everleigh", "Parker", "Madeline", "Adam", "Lydia", "Jace", "Jade", "Wesley", "Peyton", "Kayden", "Brielle", "Silas",
-    "Adeline"
+    "Adeline", "Emrys"
   ]
 
   static readonly lastNames = [
