@@ -45,7 +45,9 @@ export default abstract class Employee {
   abstract work(): void
 
   quit: () => Employee = () => {
-    return this.boss!.fire(this)
+    console.log(`${this.title} (Level ${this.level}) is quitting.`)
+    this.spendMoney(this, this.totalWages)
+    return this.boss!.employees.splice(this.employees.indexOf(this), 1)[0]
   }
 
   abstract hire(): Employee
