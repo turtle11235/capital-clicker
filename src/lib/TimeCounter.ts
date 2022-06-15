@@ -1,12 +1,12 @@
-import { ticksToSeconds } from './utils'
+import { ticksToSeconds } from "./utils"
 
 
 export default class TimeCounter {
   startTime: number
   periodInSec: number
-  getCounter: ()=>number
+  getCounter: () => number
 
-  constructor(getCounter: ()=>number, period: number) {
+  constructor(getCounter: () => number, period: number) {
     this.startTime = getCounter()
     this.getCounter = getCounter
     this.periodInSec = period
