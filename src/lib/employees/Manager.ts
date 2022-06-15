@@ -10,7 +10,7 @@ export default abstract class Manager extends Employee {
 
   fire = (employee?: Employee) => {
     if (employee) {
-      console.log(employee)
+      console.log(`Firing ${employee.title} (Level ${employee.level}).`)
       this.spendMoney(employee, employee.totalWages * FIRING_MULTIPLIER)
       return this.employees.splice(this.employees.indexOf(employee), 1)[0]
     }

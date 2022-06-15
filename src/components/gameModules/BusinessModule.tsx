@@ -1,7 +1,7 @@
-import React from 'react'
-import { Component } from 'react'
-import { Row, Col, Button } from 'react-bootstrap'
-import BaseModule from './BaseModule'
+import React from "react"
+import { Component } from "react"
+import { Row, Col, Button } from "react-bootstrap"
+import BaseModule from "./BaseModule"
 
 type Props = {
   trigger: boolean

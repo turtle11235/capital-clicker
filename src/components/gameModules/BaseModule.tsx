@@ -1,6 +1,6 @@
-import React from 'react'
-import { Component, ReactNode } from 'react'
-import { Row } from 'react-bootstrap'
+import React from "react"
+import { Component, ReactNode } from "react"
+import { Row } from "react-bootstrap"
 
 type Props = {
   trigger: boolean

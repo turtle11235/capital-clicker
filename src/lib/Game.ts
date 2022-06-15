@@ -1,6 +1,6 @@
 import App from "../App"
 import { IRL_TO_INGAME_TIME_MULTIPLIER, TICKS_PER_SECOND } from "./constants"
-import EmployeeManager from "./employees/EmployeeManager"
+import EmployeeManager from "./employees/EmployeeHandler"
 import MarketingManager from "./marketing/MarketingManager"
 import MoneyManager from "./money/MoneyManager"
 import UpgradeManager from "./upgrades/UpgradeManager"
