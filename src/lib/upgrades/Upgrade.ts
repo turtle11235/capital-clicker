@@ -16,14 +16,14 @@ export default abstract class Upgrade {
   abstract pricetag: string
   abstract description: string
 
-  // checks if all requirements all met to display the upgrade
-  // persists even if
+  // checks if all requirements to display the upgrade are met
+  // once set to true, remains true even if requirements stop being met
   abstract _trigger: () => boolean
 
-  // executes the upgrade
+  // executes the effects of the upgrade
   abstract execute: () => void
 
-  // checks if game meets requirements to purchase upgrade
+  // checks if all requirements to purchase the upgrade are met
   abstract cost: () => boolean
 
   getUpgrade: (id: UpgradeID)=>Upgrade
@@ -41,6 +41,7 @@ export default abstract class Upgrade {
     this.getUpgrade = getUpgradeCallback
   }
 
+  // wrapper code to enforce persistence of visibility
   trigger = () => {
     if (!this.used && !this.visible) {
       this.visible = this._trigger()
