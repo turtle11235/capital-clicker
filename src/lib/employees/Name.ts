@@ -9,7 +9,7 @@ export default class Name {
     "Aiden", "Layla", "Samuel", "Penelope", "Joseph", "Aria", "John", "Chloe", "David", "Grace", "Wyatt", "Ellie",
     "Matthew", "Nora", "Luke", "Hazel", "Asher", "Zoey", "Carter", "Riley", "Julian", "Victoria", "Grayson", "Lily", "Leo",
     "Aurora", "Jayden", "Violet", "Gabriel", "Nova", "Isaac", "Hannah", "Lincoln", "Emilia", "Anthony", "Zoe", "Hudson",
-    "Stella", "Dylan", "Everly", "Ezra", "Isla", "Thomas", "Leah", "Charles", "Lillian", "Christopher", "Addison", "Jaxon",
+    "Stella", "Dylan", "Everly", "Ezra", "Isla", "Thomas", "Leah", "Charles", "Lillian", "Christopher", "Addison", "Jax",
     "Willow", "Maverick", "Lucy", "Josiah", "Paisley", "Isaiah", "Natalie", "Andrew", "Naomi", "Elias", "Eliana", "Joshua",
     "Brooklyn", "Nathan", "Elena", "Caleb", "Aubrey", "Ryan", "Claire", "Adrian", "Ivy", "Miles", "Kinsley", "Eli",
     "Audrey", "Nolan", "Maya", "Christian", "Genesis", "Aaron", "Skylar", "Cameron", "Bella", "Ezekiel", "Aaliyah",

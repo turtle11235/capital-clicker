@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
-import Upgrade from '../../lib/upgrades/Upgrade'
-import BaseModule from './BaseModule'
+import React, { Component } from "react"
+import { Button } from "react-bootstrap"
+import Upgrade from "../../lib/upgrades/Upgrade"
+import BaseModule from "./BaseModule"
 
 type Props = {
   trigger: boolean
@@ -20,7 +20,7 @@ export default class UpgradesModule extends Component<Props> {
               onClick={(e) => {
                 const button = e.target as HTMLButtonElement
                 button.blur()
-                upgrade.effect()
+                upgrade.use()
               }}
               disabled={!upgrade.cost()}
             >

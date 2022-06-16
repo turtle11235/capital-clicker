@@ -1,77 +1,66 @@
-type Props = {
-  title: string
-  description: string
+import Game from "../Game"
+import UpgradeID from "./UpgradeID"
+
+export type UpgradeProps = {
+  game: Game
+  getUpgradeCallback: (id: UpgradeID, params?: UpgradeProps)=>Upgrade
+  visible?: boolean
   used?: boolean
-  triggered?: boolean
-  pricetag?: string
-  trigger?: () => boolean
-  effect?: () => void
-  cost?: () => boolean
-  maxUses?: number
+  useCount?: number
 }
 
-export default class Upgrade {
-  static idCounter = 0
-  readonly id: string
-  readonly title: string
-  readonly pricetag: string
-  readonly description: string
-  used: boolean
-  triggered: boolean
-  count = 0
-  maxUses: number
-  _trigger: () => boolean
-  _effect: () => void
-  cost: () => boolean
+export default abstract class Upgrade {
 
-  constructor({
-    title,
-    description,
-    used = false,
-    triggered = false,
-    pricetag = "",
-    trigger = () => {
-      return false
-    },
-    effect = () => {},
-    cost = () => {
-      return true
-    },
-    maxUses = 1
-  }: Props) {
-    this.id = Upgrade.createID()
+  abstract id: UpgradeID
+  abstract title: string
+  abstract pricetag: string
+  abstract description: string
 
-    this.title = title
-    this.pricetag = pricetag
-    this.description = description
+  // checks if all requirements all met to display the upgrade
+  // persists even if
+  abstract _trigger: () => boolean
 
+  // executes the upgrade
+  abstract execute: () => void
+
+  // checks if game meets requirements to purchase upgrade
+  abstract cost: () => boolean
+
+  getUpgrade: (id: UpgradeID)=>Upgrade
+
+  game: Game
+  useCount = 0
+  used = false
+  visible = false
+
+  constructor({ game, getUpgradeCallback, visible = false, used = false, useCount = 0 }: UpgradeProps) {
+    this.game = game
+    this.useCount = useCount
     this.used = used
-    this.triggered = triggered
-
-    this._trigger = trigger
-    this._effect = effect
-
-    this.cost = cost
-    this.maxUses = maxUses
-  }
-
-  static createID = () => {
-    const id = "upgrade" + Upgrade.idCounter
-    Upgrade.idCounter += 1
-    return id
+    this.visible = visible
+    this.getUpgrade = getUpgradeCallback
   }
 
   trigger = () => {
-    if (!this.used && !this.triggered) {
-      this.triggered = this._trigger()
+    if (!this.used && !this.visible) {
+      this.visible = this._trigger()
     }
-    return this.triggered
+    return this.visible
   }
 
-  effect = () => {
-    this._effect()
-    if (++this.count >= this.maxUses) {
-      this.used = true
+  use = () => {
+    this.execute()
+    this.used = true
+  }
+
+  checkDependencies = (dependencies: UpgradeID[], useCounts?: Map<UpgradeID, number>) => {
+    for (const upgradeID of dependencies) {
+      const upgrade = this.getUpgrade(upgradeID)
+      if (!upgrade.used && !(useCounts && upgrade.useCount === useCounts.get(upgradeID))) {
+        return false
+      }
     }
+
+    return true
   }
 }

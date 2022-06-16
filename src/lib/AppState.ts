@@ -1,4 +1,4 @@
-import Upgrade from './upgrades/Upgrade'
+import Upgrade from "./upgrades/Upgrade"
 
 export type AppState = {
   money: number
@@ -31,7 +31,7 @@ export const defaultAppState: AppState = {
   numManagers: 0,
   canHire: false,
   canFire: false,
-  elapsedTime: '0:0:0',
-  time: '0:0:0',
+  elapsedTime: "0:0:0",
+  time: "0:0:0",
   day: 0,
 }
