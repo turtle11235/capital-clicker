@@ -3,7 +3,7 @@ import UpgradeID from "./UpgradeID"
 
 export type UpgradeProps = {
   game: Game
-  getUpgradeCallback: (id: UpgradeID, params?: UpgradeProps)=>Upgrade
+  getUpgradeCallback: (id: UpgradeID)=>Upgrade
   visible?: boolean
   used?: boolean
   useCount?: number

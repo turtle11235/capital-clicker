@@ -25,11 +25,16 @@ export default class UpgradeManager {
     return visibleUpgrades
   }
 
-  getUpgradeByID = (id: UpgradeID, params?: UpgradeProps) => {
+  getUpgradeByID = (id: UpgradeID) => {
     if (this._upgrades.has(id)) {
       return this._upgrades.get(id)!
     }
+    else {
+      throw new Error(`Unknown upgrade with id: ${id}`)
+    }
+  }
 
+  createUpgrade = (id: UpgradeID, params: UpgradeProps) => {
     if (!params) {
       params = {
         game: this.game,
@@ -62,7 +67,6 @@ export default class UpgradeManager {
     default:
       throw new Error(`Unknown upgrade id: ${id}`)
     }
-
   }
 
   initUpgrades = (params?: {[key: string]: UpgradeProps}) => {
@@ -70,16 +74,12 @@ export default class UpgradeManager {
       params = {}
     }
 
-    this._upgrades = new Map<UpgradeID, Upgrade>([
-      [UpgradeID.UPGRADE_MODULE, this.getUpgradeByID(UpgradeID.UPGRADE_MODULE, params[UpgradeID.UPGRADE_MODULE])],
-      [UpgradeID.MONEY_MACHINE, this.getUpgradeByID(UpgradeID.MONEY_MACHINE, params[UpgradeID.MONEY_MACHINE])],
-      [UpgradeID.BUSINESS_MODULE, this.getUpgradeByID(UpgradeID.BUSINESS_MODULE, params[UpgradeID.BUSINESS_MODULE])],
-      [UpgradeID.WORKER_MACHINES, this.getUpgradeByID(UpgradeID.WORKER_MACHINES, params[UpgradeID.WORKER_MACHINES])],
-      [UpgradeID.LOWER_MANAGERS, this.getUpgradeByID(UpgradeID.LOWER_MANAGERS, params[UpgradeID.LOWER_MANAGERS])],
-      [UpgradeID.MIDDLE_MANAGERS, this.getUpgradeByID(UpgradeID.MIDDLE_MANAGERS, params[UpgradeID.MIDDLE_MANAGERS])],
-      [UpgradeID.FRIENDS_AND_FAM, this.getUpgradeByID(UpgradeID.FRIENDS_AND_FAM, params[UpgradeID.FRIENDS_AND_FAM])],
-      [UpgradeID.MARKETING_MODULE, this.getUpgradeByID(UpgradeID.MARKETING_MODULE, params[UpgradeID.MARKETING_MODULE])],
-      [UpgradeID.MARKETING_BUDGET, this.getUpgradeByID(UpgradeID.MARKETING_BUDGET, params[UpgradeID.MARKETING_BUDGET])]
-    ])
+    this._upgrades = new Map<UpgradeID, Upgrade>()
+    for (let id of Object.values(UpgradeID)) {
+      if (typeof id != "string") {
+        id = id as UpgradeID
+        this._upgrades.set(id, this.createUpgrade(id, params[id]))
+      }
+    }
   }
 }
