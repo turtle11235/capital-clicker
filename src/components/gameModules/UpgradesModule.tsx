@@ -20,7 +20,7 @@ export default class UpgradesModule extends Component<Props> {
               onClick={(e) => {
                 const button = e.target as HTMLButtonElement
                 button.blur()
-                upgrade.effect()
+                upgrade.use()
               }}
               disabled={!upgrade.cost()}
             >

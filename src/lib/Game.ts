@@ -75,6 +75,10 @@ export default class Game {
     this.startGame()
   }
 
+  unlockUpgrades = () => {
+    this.upgradeManager.upgradesEnabled = true
+  }
+
   workerClick = (n?: number) => {
     this.moneyManager.workerClick(n)
   }
@@ -137,6 +141,14 @@ export default class Game {
 
   get money() {
     return this.moneyManager.money
+  }
+
+  get userClickVal() {
+    return this.moneyManager.userClickVal
+  }
+
+  get workerClickVal() {
+    return this.moneyManager.workerClickVal
   }
 
   get businessUnlocked() {
