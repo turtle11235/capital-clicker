@@ -60,7 +60,8 @@ export default abstract class Employee {
     }
     else {
       this.spendMoney(this, this.wage)
-      for (const subordinate of this.employees) {
+      const tempEmployees = this.employees
+      for (const subordinate of tempEmployees) {
         subordinate.pay()
       }
     }
