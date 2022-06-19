@@ -1,9 +1,4 @@
-import {
-  HIRING_BONUS,
-  MANAGERS_PER_MANAGER,
-  TRAINING_OVERHEAD,
-  WORKER_SECONDS_PER_PAYDAY,
-} from "../constants"
+import { HIRING_BONUS, MANAGERS_PER_MANAGER, TRAINING_OVERHEAD, WORKER_SECONDS_PER_PAYDAY } from "../constants"
 import Executable from "../Executable"
 import Game from "../Game"
 import { ticksToSeconds } from "../utils"
@@ -62,6 +57,7 @@ export default class EmployeeManager implements Executable {
     }
   }
 
+  // TODO fix bugs in this method
   hire = () => {
     if (this.canHire) {
       if (this.root.isFull && !this.root.canHire) {
@@ -75,24 +71,24 @@ export default class EmployeeManager implements Executable {
         this.spend(oldRoot, oldRoot.hireThisCost)
       }
 
-      if (this.root.canHire) {
+      if (!this.root.isFullAllLevels) {
         this.root.hire()
       }
       else {
         console.log("Failed to hire new employee")
       }
 
-      console.log(this.root)
+      console.log("Root:", this.root)
     }
   }
 
   fire = () => {
     this.root.fire()
-    console.log(this.root)
+    console.log("Root:", this.root)
   }
 
   spend = (employee: Employee, amount: number) => {
-    console.log(this.root, employee)
+    console.log("Root:", this.root, "Employee:", employee)
     if (this.root && this.root !== employee) {
       this.game.spendMoney(amount)
     }
@@ -122,16 +118,25 @@ export default class EmployeeManager implements Executable {
     return this.root.numManagers - 1
   }
 
+  /**
+   * Determines the cost of hiring another worker. This includes:
+   * (a) The base cost of hiring a new worker
+   * (b) The cost of hiring any additional managers
+   * (c) Any required hiring bonuses
+   *
+   * @remarks
+   * If any additional managers need to be hired, the count will always be two.
+   *
+   * @returns The total cost of hiring another worker
+   */
   get hireOneCost() {
-    /*
-      if the root is full, the cost will include the cost of hiring 2 managers
-      at the level of the root (including hiring bonus)
-    */
     const cost = this.root.hireOneWorkerCost
-    if (this.root.isFull && !this.root.canHire) {
+    if (this.root.isFullAllLevels) {
+      // console.log("Entire tree is full, two managers will have to be hired to allow more workers.")
       return cost + this.root.wage * HIRING_BONUS * 2
     }
     else {
+      // console.log("A new worker can be hired without hiring more managers.")
       return cost
     }
   }
@@ -154,16 +159,19 @@ export default class EmployeeManager implements Executable {
     }
   }
 
+  /**
+   * Determines if a new worker can be hired. This is possible if the following requirements are met:
+   * (1) There is enough money to hire the worker and any managers needed to support them.
+   * (2) The level of any new managers needed does not exceed the max manager level.
+   *
+   * @returns `true` if a new worker can be hired, otherwise returns `false`
+   */
   get canHire() {
-
-    if (this.root.canHire) {
-      return true
-    }
-    else if (this.game.money >= this.hireOneCost) {
-      return this.root.level < this.maxManagerLevel
+    if (this.root.isFullAllLevels) {
+      return this.game.money >= this.hireOneCost && this.root.level < this.maxManagerLevel
     }
     else {
-      return false
+      return this.game.money >= this.hireOneCost
     }
   }
 
