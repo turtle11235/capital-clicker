@@ -41,6 +41,10 @@ export default class LowerManager extends Manager {
     return this.employees.length >= WORKERS_PER_MANAGER
   }
 
+  get isFullAllLevels() {
+    return this.isFull
+  }
+
   get totalWages() {
     return (
       this.wage + sum(this.employees.map((employee) => employee.totalWages))
