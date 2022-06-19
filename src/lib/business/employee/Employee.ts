@@ -1,6 +1,6 @@
-import { MANAGER_SALARY_MULTIPLIER } from "../constants"
-import { EmployeeProps } from "./EmployeeFactory"
-import Name from "./Name"
+import { MANAGER_SALARY_MULTIPLIER } from "../../constants"
+import { EmployeeProps } from "../EmployeeFactory"
+import Name from "../Name"
 
 export default abstract class Employee {
   props: EmployeeProps
@@ -13,6 +13,7 @@ export default abstract class Employee {
   abstract get canHire(): boolean
   abstract get canFire(): boolean
   abstract get totalWages(): number
+  abstract get maxEmployees(): number
   abstract get numWorkers(): number
   abstract get numManagers(): number
   abstract get isFull(): boolean

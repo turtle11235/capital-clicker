@@ -3,10 +3,10 @@ import {
   MANAGERS_PER_MANAGER,
   MANAGER_SALARY_MULTIPLIER,
   WORKERS_PER_MANAGER,
-} from "../constants"
-import { randomValue, sum } from "../utils"
+} from "../../constants"
+import { randomValue, sum } from "../../utils"
 import Employee from "./Employee"
-import EmployeeFactory from "./EmployeeFactory"
+import EmployeeFactory from "../EmployeeFactory"
 import Manager from "./Manager"
 
 export default class MiddleManager extends Manager {
@@ -43,6 +43,10 @@ export default class MiddleManager extends Manager {
     else {
       return this.getMoney() >= this.hireOneWorkerCost
     }
+  }
+
+  get maxEmployees(): number {
+    return MANAGERS_PER_MANAGER
   }
 
   get numWorkers() {

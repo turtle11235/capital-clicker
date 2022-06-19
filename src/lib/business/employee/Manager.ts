@@ -1,4 +1,4 @@
-import { FIRING_MULTIPLIER } from "../constants"
+import { FIRING_MULTIPLIER } from "../../constants"
 import Employee from "./Employee"
 
 export default abstract class Manager extends Employee {

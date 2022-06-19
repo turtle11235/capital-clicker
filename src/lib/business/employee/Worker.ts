@@ -1,11 +1,12 @@
-import { FIRING_MULTIPLIER, WORKER_CLICKS_PER_SECOND } from "../constants"
-import { ticksToSeconds } from "../utils"
+import { FIRING_MULTIPLIER, WORKER_CLICKS_PER_SECOND } from "../../constants"
+import { ticksToSeconds } from "../../utils"
 import Employee from "./Employee"
-import { EmployeeProps } from "./EmployeeFactory"
+import { EmployeeProps } from "../EmployeeFactory"
 
 export default class Worker extends Employee {
   readonly hireOneWorkerCost = NaN
   readonly hireAllWorkersCost = NaN
+  readonly maxEmployees = 0
   readonly numWorkers = 1
   readonly numManagers = 0
 

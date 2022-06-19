@@ -6,8 +6,8 @@ export default class MoneyManager {
   readonly roundingError = 0.005
 
   constructor(
-    money = 0,
-    totalMoney = 0,
+    money = 500,
+    totalMoney = money,
     userClickVal = 0.01,
     workerClickVal = 0.01
   ) {

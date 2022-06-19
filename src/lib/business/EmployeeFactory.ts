@@ -1,7 +1,7 @@
-import Employee from "./Employee"
-import MiddleManager from "./MiddleManager"
-import LowerManager from "./LowerManager"
-import Worker from "./Worker"
+import Employee from "./employee/Employee"
+import MiddleManager from "./employee/MiddleManager"
+import LowerManager from "./employee/LowerManager"
+import Worker from "./employee/Worker"
 
 export type EmployeeProps = {
   level: number

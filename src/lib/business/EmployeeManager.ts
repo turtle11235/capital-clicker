@@ -2,12 +2,14 @@ import { HIRING_BONUS, MANAGERS_PER_MANAGER, TRAINING_OVERHEAD, WORKER_SECONDS_P
 import Executable from "../Executable"
 import Game from "../Game"
 import { ticksToSeconds } from "../utils"
-import Employee from "./Employee"
+import Employee from "./employee/Employee"
 import EmployeeFactory from "./EmployeeFactory"
+import HiringManager from "./HiringManager"
 
 export default class EmployeeManager implements Executable {
   game: Game
   root: Employee
+  hiringManager: HiringManager
 
   minWage = 10
   wage = 10
@@ -36,6 +38,7 @@ export default class EmployeeManager implements Executable {
       boss: null,
       employees: [],
     })
+    this.hiringManager = new HiringManager(game, this.root)
   }
 
   execute = () => {
@@ -62,25 +65,27 @@ export default class EmployeeManager implements Executable {
    */
   hire = () => {
     // Hire new manager if necessary
-    if (this.root.isFullAllLevels) {
-      const oldRoot = this.root
-      const props = {
-        ...this.root.props,
-        ...{ level: this.root.level + 1, employees: [this.root] },
-      }
-      this.root = EmployeeFactory.createEmployee(props)
-      oldRoot.boss = this.root
-      this.spend(oldRoot, oldRoot.hireThisCost)
-    }
+    // if (this.root.isFullAllLevels) {
+    //   const oldRoot = this.root
+    //   const props = {
+    //     ...this.root.props,
+    //     ...{ level: this.root.level + 1, employees: [this.root] },
+    //   }
+    //   this.root = EmployeeFactory.createEmployee(props)
+    //   oldRoot.boss = this.root
+    //   this.spend(oldRoot, oldRoot.hireThisCost)
+    // }
 
-    // Hire new worker and lower manager
-    if (this.canHire) {
-      this.root.hire()
-      console.log("[EmployeeManager.hire] Employee tree updated. Current root:", this.root)
-    }
-    else {
-      console.log("Failed to hire new employee. Not enough money or not enough space.")
-    }
+    // // Hire new worker and lower manager
+    // if (this.canHire) {
+    //   this.root.hire()
+    //   console.log("[EmployeeManager.hire] Employee tree updated. Current root:", this.root)
+    // }
+    // else {
+    //   console.log("Failed to hire new employee. Not enough money or not enough space.")
+    // }
+    console.log("here")
+    this.hiringManager.hireManager()
   }
 
   fire = () => {

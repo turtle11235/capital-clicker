@@ -1,7 +1,7 @@
-import { WORKERS_PER_MANAGER } from "../constants"
-import { sum } from "../utils"
+import { WORKERS_PER_MANAGER } from "../../constants"
+import { sum } from "../../utils"
 import Employee from "./Employee"
-import EmployeeFactory, { EmployeeProps } from "./EmployeeFactory"
+import EmployeeFactory, { EmployeeProps } from "../EmployeeFactory"
 import Manager from "./Manager"
 
 export default class LowerManager extends Manager {
@@ -27,6 +27,10 @@ export default class LowerManager extends Manager {
   get canHire() {
     const hasFunds = this.getMoney() >= this.hireOneWorkerCost
     return !this.isFull && hasFunds
+  }
+
+  get maxEmployees(): number {
+    return WORKERS_PER_MANAGER
   }
 
   get numWorkers() {
