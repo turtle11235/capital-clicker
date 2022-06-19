@@ -66,7 +66,7 @@ export default class Worker extends Employee {
   }
 
   get isFullAllLevels() {
-    return this.isFull
+    return true
   }
 
   get title(): string {
