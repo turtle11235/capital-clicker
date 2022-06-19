@@ -44,7 +44,7 @@ export default class EmployeeManager implements Executable {
       for (const employee of this.root.employees) {
         employee.pay()
       }
-      console.log("PAYDAY", this.root)
+      console.log("PAYDAY")
     }
   }
 
@@ -57,38 +57,37 @@ export default class EmployeeManager implements Executable {
     }
   }
 
-  // TODO fix bugs in this method
+  /**
+   * Hires a new employee and any additional managers needed.
+   */
   hire = () => {
+    // Hire new manager if necessary
+    if (this.root.isFullAllLevels) {
+      const oldRoot = this.root
+      const props = {
+        ...this.root.props,
+        ...{ level: this.root.level + 1, employees: [this.root] },
+      }
+      this.root = EmployeeFactory.createEmployee(props)
+      oldRoot.boss = this.root
+      this.spend(oldRoot, oldRoot.hireThisCost)
+    }
+
+    // Hire new worker and lower manager
     if (this.canHire) {
-      if (this.root.isFull && !this.root.canHire) {
-        const oldRoot = this.root
-        const props = {
-          ...this.root.props,
-          ...{ level: this.root.level + 1, employees: [this.root] },
-        }
-        this.root = EmployeeFactory.createEmployee(props)
-        oldRoot.boss = this.root
-        this.spend(oldRoot, oldRoot.hireThisCost)
-      }
-
-      if (!this.root.isFullAllLevels) {
-        this.root.hire()
-      }
-      else {
-        console.log("Failed to hire new employee")
-      }
-
-      console.log("Root:", this.root)
+      this.root.hire()
+      console.log("[EmployeeManager.hire] Employee tree updated. Current root:", this.root)
+    }
+    else {
+      console.log("Failed to hire new employee. Not enough money or not enough space.")
     }
   }
 
   fire = () => {
     this.root.fire()
-    console.log("Root:", this.root)
   }
 
   spend = (employee: Employee, amount: number) => {
-    console.log("Root:", this.root, "Employee:", employee)
     if (this.root && this.root !== employee) {
       this.game.spendMoney(amount)
     }
@@ -133,7 +132,7 @@ export default class EmployeeManager implements Executable {
     const cost = this.root.hireOneWorkerCost
     if (this.root.isFullAllLevels) {
       // console.log("Entire tree is full, two managers will have to be hired to allow more workers.")
-      return cost + this.root.wage * HIRING_BONUS * 2
+      return (cost + this.root.wage * HIRING_BONUS * 2) * TRAINING_OVERHEAD
     }
     else {
       // console.log("A new worker can be hired without hiring more managers.")

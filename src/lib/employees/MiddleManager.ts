@@ -58,7 +58,7 @@ export default class MiddleManager extends Manager {
   }
 
   get isFullAllLevels() {
-    return this.employees.every((e) => e.isFull)
+    return this.isFull && this.employees.every((e) => e.isFull)
   }
 
   get totalWages() {
